@@ -30,17 +30,6 @@
     ubuntu_font_family
     nerdfonts
 	
-    # File modifiers
-    fzf
-    ripgrep
-    fd
-    bat
-    lm_sensors
-    xdo
-    xdotool
-    pcmanfm
-    lf
-
     # Terminal emulators
     kitty
     alacritty	
@@ -49,47 +38,50 @@
     htop
     kmon
 
-    # Languages and language packages
-    nodejs
-    nodePackages.npm
-    nodePackages.prettier 
-    cmake
-    gnumake
-    go
-    #python39Packages.eyeD3
-    python38Packages.eyeD3
-    gcc
-    lazygit
-
-    # User Interface
-    xwallpaper
+    # Graphical User Interfaces
+    pcmanfm
+    gnome.seahorse
     lxappearance
- 
-    # Misc
+    pavucontrol
+    libreoffice-fresh
+    emacs
+    qalculate-gtk
+    evince
+    mullvad-vpn
+    gimp
+    gnome.geary
+
+    # Terminal applications
+    fzf
+    ripgrep
+    fd
+    bat
+    lm_sensors
+    xdo
+    xdotool
     sxiv
+    ffmpeg
+    lf
+    youtube-dl
+    xwallpaper
     starship
     zsh
     mpv
-    pavucontrol
     pamixer
     polkit_gnome
     zip
     unzip
-    #libreoffice-fresh
     jq
     xcompmgr
     neofetch
     sysstat
     scrot
-    emacs
     shfmt
     shellcheck
-    qalculate-gtk
     newsboat
     transmission
     stig
     tree-sitter 
-    evince
     xclip
     mediainfo
     unrar
@@ -97,7 +89,6 @@
     highlight
     tree
     glow
-    mullvad-vpn
     pistol
     dragon-drop
     mpd
@@ -105,105 +96,152 @@
     mpc_cli
     lsd
     mlocate
-    gimp
     git
     dunst
     neovim-nightly
     libnotify
     wmname
-    
+
+    # Languages and language packages
+    nodejs
+    nodePackages.npm
+    nodePackages.prettier 
+    cmake
+    gnumake
+    go
+    python3Full
+    python39Packages.eyeD3
+    #python38Packages.eyeD3
+    gcc
+    lazygit
+
   ];
 
-  programs.firefox = {
+  # Gtk settings
+  gtk = {
     enable = true;
-      extensions = with pkgs.nur.repos.rycee.firefox-addons; [
-          decentraleyes
-          bitwarden
-          ublock-origin
-          clearurls
-          sponsorblock
-          darkreader
-          h264ify
-          df-youtube
-      ];
-      profiles.notus = {
-          settings = {
-              "media.peerconnection.enabled" = false;
-              "media.peerconnection.turn.disable" = true;
-              "media.peerconnection.use_document_iceservers" = false;
-              "media.peerconnection.video.enabled" = false;
-              "media.peerconnection.identity.timeout" = 1;
-              "privacy.firstparty.isolate" = true;
-              "privacy.resistFingerprinting" = true;
-              "privacy.trackingprotection.fingerprinting.enabled" = true;
-              "privacy.trackingprotection.cryptomining.enabled" = true;
-              "privacy.trackingprotection.enabled" = true;
-              "privacy.donottrackheader.enabled" = true;
-              "browser.send_pings" = false;
-              "browser.aboutConfig.showWarning" = false;
-              "browser.tabs.warnOnClose" = false;
-              "browser.urlbar.speculativeConnect.enabled" = false;
-              "dom.event.clipboardevents.enabled" = false;
-              "dom.forms.autocomplete.formautofill" = false;
-              "media.navigator.enabled" = false;
-              "network.cookie.cookieBehavior" = 1;
-              "network.http.referer.XOriginPolicy" = 2;
-              "network.http.referer.XOriginTrimmingPolicy" = 2;
-              "beacon.enabled" = false;
-              "browser.safebrowsing.downloads.remote.enabled" = false;
-              "network.dns.disablePrefetch" = true;
-              "network.dns.disablePrefetchFromHTTPS" = true;
-              "network.predictor.enabled" = false;
-              "network.predictor.enable-prefetch" = false;
-              "network.prefetch-next" = false;
-              "network.IDN_show_punycode" = true;
-              "extensions.activeThemeID" = "firefox-compact-dark@mozilla.org";
-              "browser.newtabpage.activity-stream.feeds.section.topstories" = false;
-              "browser.newtabpage.activity-stream.feeds.topsites" = false;
-              "app.shield.optoutstudies.enabled" = false;
-              "dom.security.https_only_mode_ever_enabled" = true;
-              "dom.security.https_only_mode" = true;
-              "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
-              "browser.toolbars.bookmarks.visibility" = "never";
-              "browser.search.suggest.enabled" = false;
-              "browser.urlbar.shortcuts.bookmarks" = false;
-              "browser.urlbar.shortcuts.history" = false;
-              "browser.urlbar.shortcuts.tabs" = false;
-              "browser.urlbar.suggest.bookmark" = false;
-              "browser.urlbar.suggest.engines" = false;
-              "browser.urlbar.suggest.history" = false;
-              "browser.urlbar.suggest.openpage" = false;
-              "browser.urlbar.suggest.topsites" = false;
-              "browser.uidensity" = 1;
-              "media.autoplay.enabled" = false;
-              "media.eme.enabled" = true;
-              "extensions.pocket.enabled" = false;
-              "identity.fxaccounts.enabled" = false;
-              "toolkit.zoomManager.zoomValues" = ".8,.95,1,1.1,1.2";
-              "toolkit.telemetry.reportingpolicy.firstRun" = false;
-              "toolkit.telemetry.pioneer-new-studies-available" = false;
-              "signon.autofillForms" = false;
-              "signon.generation.enabled" = false;
-              "toolkit.telemetry.cachedClientID" = "c0ffeec0-ffee-c0ff-eec0-ffeec0ffeec0";
-              "toolkit.telemetry.firstShutdownPing.enabled" = false;
-              "toolkit.telemetry.newProfilePing.enabled" = false;
-              "browser.safebrowsing.downloads.remote.block_dangerous" = false;
-              "browser.safebrowsing.downloads.remote.block_dangerous_host" = false;
-              "browser.safebrowsing.downloads.remote.block_potentially_unwanted" = false;
-              "browser.safebrowsing.downloads.remote.block_uncommon" = false;
-          };
-          userChrome = "
-              * { 
-                  box-shadow: none !important;
-                  border: 0px solid !important;
-              }
-          ";
-      };
-
+    theme.name = "Adwaita-dark";
   };
 
-  # Start dunst
-  #services.dunst.enable = true;
+  services.dunst = {
+    enable = true;
+    settings = {
+      global = {
+        geometry = "0x0-30+30";
+        transparency = 0;
+        frame_color = "#f8f8f2";
+        padding = 8;
+        horizontal_padding = 8;
+        frame_width = 3;
+        font = "RobotoMono Nerd Font 10";
+        vertical_alignment = "center";
+        show_age_threshold = -1;
+        word_wrap = true;
+        corner_radius = 10;
+      };
+      urgency_normal = {
+        background = "#1e1e1e"; 
+        foreground = "#f8f8f2"; 
+        frame_color = "#4166f5"; 
+      };
+
+      urgency_low = {
+        background = "#1e1e1e"; 
+        foreground = "#f8f8f2"; 
+        frame_color = "#4166f5"; 
+      };
+    };
+  };
+
+
+  # Firefox settings
+  programs.firefox = {
+    enable = true;
+    extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+        decentraleyes
+        bitwarden
+        ublock-origin
+        clearurls
+        sponsorblock
+        darkreader
+        h264ify
+        df-youtube
+    ];
+    profiles.jackson = {
+        settings = {
+            "media.peerconnection.enabled" = false;
+            "media.peerconnection.turn.disable" = true;
+            "media.peerconnection.use_document_iceservers" = false;
+            "media.peerconnection.video.enabled" = false;
+            "media.peerconnection.identity.timeout" = 1;
+            "privacy.firstparty.isolate" = true;
+            "privacy.resistFingerprinting" = true;
+            "privacy.trackingprotection.fingerprinting.enabled" = true;
+            "privacy.trackingprotection.cryptomining.enabled" = true;
+            "privacy.trackingprotection.enabled" = true;
+            "privacy.donottrackheader.enabled" = true;
+            "browser.send_pings" = false;
+            "browser.aboutConfig.showWarning" = false;
+            "browser.tabs.warnOnClose" = false;
+            "browser.urlbar.speculativeConnect.enabled" = false;
+            "dom.event.clipboardevents.enabled" = false;
+            "dom.forms.autocomplete.formautofill" = false;
+            "media.navigator.enabled" = false;
+            "network.cookie.cookieBehavior" = 1;
+            "network.http.referer.XOriginPolicy" = 2;
+            "network.http.referer.XOriginTrimmingPolicy" = 2;
+            "beacon.enabled" = false;
+            "browser.safebrowsing.downloads.remote.enabled" = false;
+            "network.dns.disablePrefetch" = true;
+            "network.dns.disablePrefetchFromHTTPS" = true;
+            "network.predictor.enabled" = false;
+            "network.predictor.enable-prefetch" = false;
+            "network.prefetch-next" = false;
+            "network.IDN_show_punycode" = true;
+            "extensions.activeThemeID" = "firefox-compact-dark@mozilla.org";
+            "browser.newtabpage.activity-stream.feeds.section.topstories" = false;
+            "browser.newtabpage.activity-stream.feeds.topsites" = false;
+            "app.shield.optoutstudies.enabled" = false;
+            "dom.security.https_only_mode_ever_enabled" = true;
+            "dom.security.https_only_mode" = true;
+            "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
+            "browser.toolbars.bookmarks.visibility" = "never";
+            "browser.search.suggest.enabled" = false;
+            "browser.urlbar.shortcuts.bookmarks" = false;
+            "browser.urlbar.shortcuts.history" = false;
+            "browser.urlbar.shortcuts.tabs" = false;
+            "browser.urlbar.suggest.bookmark" = false;
+            "browser.urlbar.suggest.engines" = false;
+            "browser.urlbar.suggest.history" = false;
+            "browser.urlbar.suggest.openpage" = false;
+            "browser.urlbar.suggest.topsites" = false;
+            "browser.uidensity" = 1;
+            "media.autoplay.enabled" = false;
+            "media.eme.enabled" = true;
+            "extensions.pocket.enabled" = false;
+            "identity.fxaccounts.enabled" = false;
+            "toolkit.zoomManager.zoomValues" = ".8,.95,1,1.1,1.2";
+            "toolkit.telemetry.reportingpolicy.firstRun" = false;
+            "toolkit.telemetry.pioneer-new-studies-available" = false;
+            "signon.autofillForms" = false;
+            "signon.generation.enabled" = false;
+            "toolkit.telemetry.cachedClientID" = "c0ffeec0-ffee-c0ff-eec0-ffeec0ffeec0";
+            "toolkit.telemetry.firstShutdownPing.enabled" = false;
+            "toolkit.telemetry.newProfilePing.enabled" = false;
+            "browser.safebrowsing.downloads.remote.block_dangerous" = false;
+            "browser.safebrowsing.downloads.remote.block_dangerous_host" = false;
+            "browser.safebrowsing.downloads.remote.block_potentially_unwanted" = false;
+            "browser.safebrowsing.downloads.remote.block_uncommon" = false;
+        };
+        userChrome = "
+            * { 
+                box-shadow: none !important;
+                border: 0px solid !important;
+            }
+        ";
+    };
+
+  };
 
   # Configure git
   programs.git = {
@@ -386,8 +424,6 @@
        
 	pidof mpd || mpd &
 	/home/jackson/.local/bin/setbg &
-
-	dunst &
 
 	wmname LG3D &
 

@@ -112,6 +112,12 @@
 
   # Enable polkit
   security.polkit.enable = true;
+  programs.dconf.enable = true;
+
+  services.gnome = {
+    gnome-keyring.enable = true;
+    gnome-online-accounts.enable = true;
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
