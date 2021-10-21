@@ -40,6 +40,7 @@
 
     # Graphical User Interfaces
     pcmanfm
+    stalonetray
     gnome.seahorse
     lxappearance
     pavucontrol
@@ -241,6 +242,12 @@
         ";
     };
 
+  };
+
+  # Configure Nextcloud-client
+  services.nextcloud-client = {
+    enable = true;
+    startInBackground = true;
   };
 
   # Configure git
