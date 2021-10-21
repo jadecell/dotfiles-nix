@@ -48,7 +48,6 @@
     emacs
     qalculate-gtk
     evince
-    mullvad-vpn
     gimp
     gnome.geary
 
@@ -140,6 +139,7 @@
         word_wrap = true;
         corner_radius = 10;
       };
+
       urgency_normal = {
         background = "#1e1e1e"; 
         foreground = "#f8f8f2"; 
@@ -153,7 +153,6 @@
       };
     };
   };
-
 
   # Firefox settings
   programs.firefox = {
@@ -244,12 +243,6 @@
 
   };
 
-  # Configure Nextcloud-client
-  services.nextcloud-client = {
-    enable = true;
-    startInBackground = true;
-  };
-
   # Configure git
   programs.git = {
     enable = true;
@@ -278,8 +271,74 @@
     ];
 
     shellAliases = {
-      neo = "neofetch";	
-      ls = "lsd -Al";
+
+      # Verbosity
+      cp = "cp -iv";
+      mv = "mv -iv";
+      rm = "rm -Iv";
+      bc = "bc -ql";
+      mkdir = "mkdir -pv";
+      ffmpeg = "ffmpeg -hide_banner";
+
+      # Youtube-dl
+      yta-aac = "youtube-dl --extract-audio --audio-format aac ";
+      yta-best = "youtube-dl --extract-audio --audio-format best ";
+      yta-flac = "youtube-dl --extract-audio --audio-format flac ";
+      yta-m4a = "youtube-dl --extract-audio --audio-format m4a ";
+      yta-mp3 = "youtube-dl --extract-audio --audio-format mp3 ";
+      yta-opus = "youtube-dl --extract-audio --audio-format opus ";
+      yta-vorbis = "youtube-dl --extract-audio --audio-format vorbis ";
+      yta-wav = "youtube-dl --extract-audio --audio-format wav ";
+      ytv-best = "youtube-dl -f bestvideo+bestaudio ";
+
+      # systemD
+      S = "sudo systemctl";
+
+      # Change Directory 
+      cd1 = "cd ..";
+      cd2 = "cd ../..";
+      cd3 = "cd ../../..";
+      cd4 = "cd ../../../..";
+      cd5 = "cd ../../../../..";
+      cd6 = "cd ../../../../../..";
+
+      # Colorize commands
+      grep = "grep --color=auto";
+      diff = "diff --color=auto";
+      egrep = "egrep --color=auto";
+      fgrep = "fgrep --color=auto";
+
+      # Shorten long commands
+      ka = "killall";
+      sdn = "shutdown now";
+      v = "nvim";
+      c = "vscode";
+      cat = "bat";
+
+      # List files and directories
+      ls = "lsd -Al --color=always --group-dirs first";
+
+      # Git
+      lg = "lazygit";
+      g = "/usr/bin/git";
+      gs = "/usr/bin/git status";
+      ga = "/usr/bin/git add -u";
+      gaa = "/usr/bin/git add .";
+      gc = "/usr/bin/git commit -m";
+      gp = "/usr/bin/git push origin master";
+      gpa = "/usr/bin/git push gitlab master && /usr/bin/git push github master";
+
+      # Applications
+      se = "sudoedit";
+
+      # University class folders
+      m1140 = "cd $HOME/Nextcloud/School/KPU/Year-1/Term-1/MATH-1140/ && ls";
+      m1115 = "cd $HOME/Nextcloud/School/KPU/Year-1/Term-1/MATH-1115/ && ls";
+      i1113 = "cd $HOME/Nextcloud/School/KPU/Year-1/Term-1/INFO-1113/ && ls";
+      i1213 = "cd $HOME/Nextcloud/School/KPU/Year-1/Term-1/INFO-1213/ && ls";
+      i1214 = "cd $HOME/Nextcloud/School/KPU/Year-1/Term-1/INFO-1214/ && ls";
+      i1111 = "cd $HOME/Nextcloud/School/KPU/Year-1/Summer/INFO-1111/ && ls";
+
     }; 
 
     initExtra = ''
@@ -310,7 +369,7 @@
 	export LESSHISTFILE="-"
 
 	# Default Applications
-	export EDITOR="lvim"
+	export EDITOR="nvim"
 	export BROWSER="firefox"
 	export TERMINAL="alacritty"
 
@@ -399,6 +458,16 @@
 	*.jar=♨:\
 	*.java=♨:\
 	"
+        webup() {
+                folder=$(pwd | cut -d'/' -f6)
+                /usr/bin/rsync -rtvzP "$(pwd)/" "root@mccrory.xyz:/var/www/$folder"
+        }
+
+        sec() {
+                du -a ~/.local/bin/* ~/.local/bin/cron/* ~/.local/bin/statusbar/* ~/.config/* ~/.config/dmenu/scripts/* | awk '{print $2}' | fzf | xargs -r $EDITOR
+                [ "$EDITOR" = "code" ] && exit
+        }
+
 	eval "$(starship init zsh)"
 
     '';
@@ -418,7 +487,7 @@
         #!/bin/sh
 	
 	status() {
-	   echo \"$(/home/jackson/.local/bin/statusbar/sb-news) | $(/home/jackson/.local/bin/statusbar/sb-cpuperc dwm) | $(/home/jackson/.local/bin/statusbar/sb-memory dwm) | $(/home/jackson/.local/bin/statusbar/sb-cputemp) | $(/home/jackson/.local/bin/statusbar/sb-clock dwm)\" 
+	   echo \"$(/home/jackson/.local/bin/statusbar/sb-news) | $(/home/jackson/.local/bin/statusbar/sb-cpuperc dwm) | $(/home/jackson/.local/bin/statusbar/sb-memory dwm) | $(/home/jackson/.local/bin/statusbar/sb-cputemp) | $(/home/jackson/.local/bin/statusbar/sb-clock dwm) | $(/home/jackson/.local/bin/statusbar/sb-networking dwm) \" 
 	}	
 
 	xset r rate 300 50 &
