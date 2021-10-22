@@ -375,7 +375,7 @@
 	export TERMINAL="alacritty"
 
 	# General
-	export PATH="$PATH:/home/jackson/.emacs.d/bin:$(find ~/.local/repos/dotfiles/home/.local/bin -type d -printf %p:)"
+	export PATH="$PATH:/home/jackson/.config/nixos/bin:/home/jackson/.emacs.d/bin:$(find ~/.local/repos/dotfiles/home/.local/bin -type d -printf %p:)"
 	export QT_QPA_PLATFORMTHEME="qt5ct"
 	export FZF_DEFAULT_OPTS="--layout=reverse --height 40%"
 	export SUDO_ASKPASS="$HOME/.config/dmenu/scripts/dmenu-pass.sh"
