@@ -43,7 +43,7 @@
           home-manager.nixosModules.home-manager {
            home-manager.useGlobalPkgs = true;
            home-manager.useUserPackages = true;
-           home-manager.users.jackson = import ./users/jackson/home.nix;
+           home-manager.users.jackson = import ./config/home.nix;
            nixpkgs.overlays = [ 
 
 	     # Dwm

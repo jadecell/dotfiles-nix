@@ -20,7 +20,7 @@ in
 {
     
 environment.systemPackages = with pkgs; [
-    (neovim.override {
+    (neovim-nightly.override {
         configure = {
             packages.myPlugins = with pkgs.vimPlugins; {
                 start = [ popup-nvim plenary-nvim nvim-compe neorg ];
