@@ -62,6 +62,7 @@
     sxiv
     ffmpeg
     lf
+    ranger
     youtube-dl
     xwallpaper
     starship
