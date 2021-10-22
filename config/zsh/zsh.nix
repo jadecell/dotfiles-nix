@@ -1,6 +1,5 @@
 pkgs:
 {
-programs.zsh = {
     enable = true;
     enableAutosuggestions = true;
     enableCompletion = true;
@@ -226,7 +225,5 @@ programs.zsh = {
         size = 1000;
         path = "$HOME/.cache/zsh_history";
     };
-
-  };
 
 }
