@@ -65,9 +65,10 @@
 
 
   # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.lightdm.enable = true;
-  services.xserver.windowManager.dwm.enable = true;
+  #services.xserver.displayManager.lightdm.enable = true;
+  services.xserver.displayManager.startx.enable = true;
   services.xserver.displayManager.defaultSession = "none+dwm";
+  services.xserver.windowManager.dwm.enable = true;
   
   # Configure keymap in X11
   services.xserver.layout = "us";

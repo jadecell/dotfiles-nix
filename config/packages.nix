@@ -6,12 +6,6 @@
     # Install all the packages
     environment.systemPackages = with pkgs; [
 
-      # Fonts
-      #joypixels
-      #cantarell-fonts
-      #ubuntu_font_family
-      #nerdfonts
-          
       # Terminal emulators
       kitty
       alacritty	
@@ -34,6 +28,7 @@
       evince
       gimp
       gnome.geary
+      nextcloud-client
 
       # Misc
       dmenu

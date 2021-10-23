@@ -3,11 +3,11 @@
     "dwm": {
       "flake": false,
       "locked": {
-        "lastModified": 1634798285,
+        "lastModified": 1634973339,
         "narHash": "sha256-nngU3Wog91edVGjO4sT8G+CsvNmPkztEjMD1rybzovM=",
         "owner": "jadecell",
         "repo": "dwm",
-        "rev": "883c0bb8a84ff824bd848c494d3a2f79d92c71fe",
+        "rev": "25e2e311dd0c85acc1ab25de7171e9c351fd496c",
         "type": "github"
       },
       "original": {
