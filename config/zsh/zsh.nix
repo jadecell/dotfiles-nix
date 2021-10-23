@@ -1,6 +1,7 @@
 pkgs:
 {
     enable = true;
+    dotDir = ".config/zsh";
     enableAutosuggestions = true;
     enableCompletion = true;
 
@@ -216,6 +217,7 @@ pkgs:
                 [ "$EDITOR" = "code" ] && exit
         }
 
+        # Startup starship
 	eval "$(starship init zsh)"
 
     '';

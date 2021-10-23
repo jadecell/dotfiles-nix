@@ -14,6 +14,7 @@
   environment.variables = {
        NIXOS_CONFIG="$HOME/.config/nixos/configuration.nix";
        NIXOS_CONFIG_DIR="$HOME/.config/nixos/";
+       ZDOTDIR="$HOME/.config/zsh";
   }; 
   
   # Nix settings, auto cleanup and enable flakes
@@ -94,9 +95,15 @@
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
   };
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment.systemPackages = with pkgs; [
+  nixpkgs.config.joypixels.acceptLicense = true;
+  # Install fonts
+  fonts.fonts = with pkgs; [
+      jetbrains-mono 
+      roboto
+      joypixels
+      ubuntu_font_family
+      cantarell-fonts
+      (nerdfonts.override { fonts = [ "RobotoMono" ]; })
   ];
 
   nixpkgs.overlays = [

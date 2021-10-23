@@ -2,16 +2,15 @@
 
 {
     nixpkgs.config.allowUnfree = true;
-    nixpkgs.config.joypixels.acceptLicense = true;
 
     # Install all the packages
     environment.systemPackages = with pkgs; [
 
       # Fonts
-      joypixels
-      cantarell-fonts
-      ubuntu_font_family
-      nerdfonts
+      #joypixels
+      #cantarell-fonts
+      #ubuntu_font_family
+      #nerdfonts
           
       # Terminal emulators
       kitty

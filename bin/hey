@@ -21,7 +21,7 @@ LIGHTGRAY='\033[1;37m'
 NC='\033[0m'
 
 print() {
-  printf "\n[+] ${MAGENTA}${1}${NC}\n\n"
+  printf "\n[+] ${GREEN}${1}${NC}\n\n"
 }
 
 error() {
@@ -45,6 +45,17 @@ case "$1" in
   ;;
 esac
 
+cd "$NIXOS_CONFIG_DIR"
+
 if [ $updateoption ]; then
-  print "you selected update"
+  sudo nix flake update
+  sudo nixos-rebuild switch --flake .#
+  print "Successfully updated system!"
+  exit 0
+fi
+
+if [ $switchoption ]; then
+  sudo nixos-rebuild switch --flake .#
+  print "Successfully switched system!"
+  exit 0
 fi
