@@ -5,6 +5,7 @@ let
     zshsettings = import ./zsh/zsh.nix;
     firefoxsettings = import ./firefox/firefox.nix;
     starshipsettings = import ./starship/starship.nix; 
+    zathurasettings = import ./zathura/zathura.nix;
 in
 {
   # Let Home Manager install and manage itself.
@@ -28,9 +29,11 @@ in
   home.stateVersion = "21.05";
 
   # Source extra files to clean this one up
+  imports = [ ./fixmonitors/fixmonitors.nix ];
   programs.zsh = zshsettings pkgs;
   programs.firefox = firefoxsettings pkgs;
   programs.starship = starshipsettings pkgs;
+  programs.zathura = zathurasettings pkgs;
 
   fonts.fontconfig.enable = true;
 
