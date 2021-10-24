@@ -1,12 +1,10 @@
 { config, pkgs, ... }:
 
 let
-    # Import zsh config file
+    # Import all external config files
     zshsettings = import ./zsh/zsh.nix;
-
-    # Import firefox settings
     firefoxsettings = import ./firefox/firefox.nix;
-
+    starshipsettings = import ./starship/starship.nix; 
 in
 {
   # Let Home Manager install and manage itself.
@@ -32,7 +30,7 @@ in
   # Source extra files to clean this one up
   programs.zsh = zshsettings pkgs;
   programs.firefox = firefoxsettings pkgs;
-  programs.starship = import ./starship/starship.nix;
+  programs.starship = starshipsettings pkgs;
 
   fonts.fontconfig.enable = true;
 
