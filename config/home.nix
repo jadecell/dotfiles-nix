@@ -32,7 +32,7 @@ in
   # Source extra files to clean this one up
   programs.zsh = zshsettings pkgs;
   programs.firefox = firefoxsettings pkgs;
-  programs.starship = import ./config/starship/starship.nix;
+  programs.starship = import ./starship/starship.nix;
 
   fonts.fontconfig.enable = true;
 
