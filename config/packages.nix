@@ -29,6 +29,7 @@
       gimp
       gnome.geary
       nextcloud-client
+      nitrogen
 
       # Misc
       dmenu
