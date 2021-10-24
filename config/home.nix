@@ -29,7 +29,10 @@ in
   home.stateVersion = "21.05";
 
   # Source extra files to clean this one up
-  imports = [ ./fixmonitors/fixmonitors.nix ];
+  imports = [ 
+    ./fixmonitors/fixmonitors.nix 
+    ./sxiv/sxiv.nix
+  ];
   programs.zsh = zshsettings pkgs;
   programs.firefox = firefoxsettings pkgs;
   programs.starship = starshipsettings pkgs;

@@ -28,18 +28,17 @@ pkgs:
       recolor-lightcolor = "#2a2a2a";
       recolor-darkcolor = "#d8dee9";
       statusbar-home-tilde = true;
-      adjust-open = "width";
       recolor = true;
       selection-clipboard = "clipboard";
       font = "RobotoMono Nerd Font 8";
     };
 
   extraConfig = "
-  map <Left> navigate previous
-  map <Right> navigate next
-  map <C-=> zoom in
-  map <C--> zoom out
-  map B jumplist backward
-  map b jumplist forward
+map <Left> navigate previous
+map <Right> navigate next
+map <C-=> zoom in
+map <C--> zoom out
+map B jumplist backward
+map b jumplist forward
   ";
 }
