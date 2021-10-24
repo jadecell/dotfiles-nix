@@ -220,6 +220,8 @@ pkgs:
         # Startup starship
 	eval "$(starship init zsh)"
 
+        # Autostart X if on default tty
+        [ "$(tty)" = "/dev/tty1" ] && ! pidof -s Xorg > /dev/null 2>&1 && exec startx
     '';
 
     history = {

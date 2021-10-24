@@ -6,6 +6,7 @@ let
 
     # Import firefox settings
     firefoxsettings = import ./firefox/firefox.nix;
+
 in
 {
   # Let Home Manager install and manage itself.
@@ -31,6 +32,7 @@ in
   # Source extra files to clean this one up
   programs.zsh = zshsettings pkgs;
   programs.firefox = firefoxsettings pkgs;
+  programs.starship = import ./config/starship/starship.nix;
 
   fonts.fontconfig.enable = true;
 
@@ -85,7 +87,7 @@ in
         #!/bin/sh
 	
 	status() {
-	   echo \"$(/home/jackson/.local/bin/statusbar/sb-news) | $(/home/jackson/.local/bin/statusbar/sb-cpuperc dwm) | $(/home/jackson/.local/bin/statusbar/sb-memory dwm) | $(/home/jackson/.local/bin/statusbar/sb-cputemp) | $(/home/jackson/.local/bin/statusbar/sb-clock dwm) | $(/home/jackson/.local/bin/statusbar/sb-networking dwm) \" 
+	   echo \"$(sb-news) | $(sb-cpuperc dwm) | $(sb-memory dwm) | $(sb-cputemp) | $(sb-clock dwm) | $(sb-networking dwm) \" 
 	}	
 
 	xset r rate 300 50 &
@@ -97,9 +99,9 @@ in
 	pidof xcompmgr || xcompmgr &
        
 	pidof mpd || mpd &
-	/home/jackson/.local/bin/setbg &
+	setbg &
 
-	wmname LG3D &
+        pidof udiskie || udiskie --tray &
 
 	while true; do
 		xsetroot -name \"$(status)\"

@@ -32,6 +32,8 @@
 
       # Misc
       dmenu
+      udiskie
+      udisks2
 
       # Terminal applications
       killall
