@@ -6,6 +6,7 @@
     # Install all the packages
     environment.systemPackages = with pkgs; [
 
+      dwmblocks
       # Terminal emulators
       kitty
       alacritty	

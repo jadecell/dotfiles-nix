@@ -29,9 +29,14 @@
   nixpkgs.config.allowBroken = true;
 
   # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.supportedFilesystems = [ "ntfs" "ext4" "vfat" ];
+  boot = {
+    loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+    };
+    supportedFilesystems = [ "ntfs" "ext4" "vfat" ];
+    kernelPackages = pkgs.linuxPackages_latest;
+  };
 
   networking.hostName = "orion"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.

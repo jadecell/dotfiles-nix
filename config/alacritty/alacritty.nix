@@ -4,10 +4,6 @@ pkgs:
   settings = {
     window = {
       dynamic_title = true;
-      padding = {
-        left = 6;
-        right = 6;
-      };
       dynamic_padding = false;
       title = "Alacritty";
       class = {

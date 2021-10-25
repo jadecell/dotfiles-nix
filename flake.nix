@@ -11,6 +11,12 @@
         flake = false;
     };
 
+    dwmblocks = {
+        url = "github:jadecell/dwmblocks";
+        inputs.nixpkgs.follows = "nixpkgs";
+        flake = false;
+    };
+
     nur = {
         url = "github:nix-community/NUR";
         inputs.nixpkgs.follows = "nixpkgs";
@@ -22,7 +28,7 @@
     };
   };
 
-  outputs = { nixpkgs, home-manager, dwm, nur, neovim-nightly-overlay, ... }:
+  outputs = { nixpkgs, home-manager, dwm, dwmblocks, nur, neovim-nightly-overlay, ... }:
   let
     system = "x86_64-linux";
     
@@ -50,6 +56,12 @@
 	     (final: prev: {
 		   dwm = prev.dwm.overrideAttrs (o: {
 	           src = dwm;
+		   });
+             })
+
+	     (final: prev: {
+		   dwmblocks = prev.dwmblocks.overrideAttrs (o: {
+	           src = dwmblocks;
 		   });
              })
 

@@ -7,6 +7,7 @@ let
     starshipsettings = import ./starship/starship.nix; 
     zathurasettings = import ./zathura/zathura.nix;
     alacrittysettings = import ./alacritty/alacritty.nix;
+    ncmpcppsettings = import ./ncmpcpp/ncmpcpp.nix;
 in
 {
   # Let Home Manager install and manage itself.
@@ -38,6 +39,7 @@ in
   programs.starship = starshipsettings pkgs;
   programs.zathura = zathurasettings pkgs;
   programs.alacritty = alacrittysettings pkgs;
+  programs.ncmpcpp = ncmpcppsettings pkgs;
 
   fonts.fontconfig.enable = true;
 
@@ -91,10 +93,6 @@ in
       text = " 
         #!/bin/sh
 	
-	status() {
-	   echo \"$(sb-news) | $(sb-cpuperc dwm) | $(sb-memory dwm) | $(sb-cputemp) | $(sb-clock dwm) | $(sb-networking dwm) \" 
-	}	
-
 	xset r rate 300 50 &
 	xset s off -dpms &
 	
@@ -107,11 +105,7 @@ in
 	setbg &
 
         pidof udiskie || udiskie --tray &
-
-	while true; do
-		xsetroot -name \"$(status)\"
-		sleep 5
-	done
+        pidof dwmblocks || dwmblocks &
 
 	";
      };
