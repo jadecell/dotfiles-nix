@@ -97,7 +97,10 @@
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
   };
 
+  environment.shells = [ pkgs.bashInteractive pkgs.zsh ];
+
   nixpkgs.config.joypixels.acceptLicense = true;
+
   # Install fonts
   fonts.fonts = with pkgs; [
       jetbrains-mono 
@@ -106,17 +109,6 @@
       ubuntu_font_family
       cantarell-fonts
       (nerdfonts.override { fonts = [ "RobotoMono" ]; })
-  ];
-
-  nixpkgs.overlays = [
-
-    #(final: prev: {
-    #  dwm = prev.dwm.overrideAttrs (old: { src = /home/jackson/.local/repos/dwm ;});
-    #})
-
-    #(final: prev: {
-    #  dmenu = prev.dmenu.overrideAttrs (old: { src = /home/jackson/.local/repos/dmenu ;});
-    #})
   ];
 
   # Enable polkit

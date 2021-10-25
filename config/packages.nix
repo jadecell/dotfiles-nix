@@ -6,7 +6,6 @@
     # Install all the packages
     environment.systemPackages = with pkgs; [
 
-      dwmblocks
       # Terminal emulators
       kitty
       alacritty	
@@ -16,6 +15,7 @@
       kmon
 
       # Graphical User Interfaces
+      gparted
       mullvad-vpn
       firefox
       pcmanfm
@@ -33,6 +33,8 @@
       nitrogen
 
       # Misc
+      pop-gtk-theme
+      dwmblocks
       dmenu
       udiskie
       udisks2
