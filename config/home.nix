@@ -34,7 +34,6 @@ in
   # Source extra files to clean this one up
   imports = [ 
     ./fixmonitors/fixmonitors.nix 
-    ./neovim/neovim.nix
   ];
   programs.zsh = zshsettings pkgs;
   programs.firefox = firefoxsettings pkgs;
@@ -109,6 +108,8 @@ in
 
         pidof udiskie || udiskie --tray &
         pidof dwmblocks || dwmblocks &
+
+	${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1 &
 
 	";
      };
