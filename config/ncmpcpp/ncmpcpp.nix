@@ -1,7 +1,6 @@
 pkgs:
 {
   enable = true;
-  mpdMusicDir = "/home/jackson/.config/mpd";
   settings = {
     autocenter_mode = true;
     follow_now_playing_lyrics = true;

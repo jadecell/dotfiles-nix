@@ -8,6 +8,7 @@ let
     zathurasettings = import ./zathura/zathura.nix;
     alacrittysettings = import ./alacritty/alacritty.nix;
     ncmpcppsettings = import ./ncmpcpp/ncmpcpp.nix;
+    newsboatsettings = import ./newsboat/newsboat.nix;
 in
 {
   # Let Home Manager install and manage itself.
@@ -40,6 +41,7 @@ in
   programs.zathura = zathurasettings pkgs;
   programs.alacritty = alacrittysettings pkgs;
   programs.ncmpcpp = ncmpcppsettings pkgs;
+  programs.newsboat = newsboatsettings pkgs;
 
   fonts.fontconfig.enable = true;
 
