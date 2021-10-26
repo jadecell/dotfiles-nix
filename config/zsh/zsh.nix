@@ -214,7 +214,7 @@ pkgs:
         }
 
         sec() {
-                du -a ~/.local/bin/* ~/.local/bin/cron/* ~/.local/bin/statusbar/* ~/.config/* ~/.config/dmenu/scripts/* | awk '{print $2}' | fzf | xargs -r $EDITOR
+                du -a ~/.config/nixos/bin/* ~/.config/nixos/bin/cron/* ~/.config/nixos/bin/statusbar/* ~/.config/* ~/.config/nixos/bin/dmenu/scripts/* | awk '{print $2}' | fzf | xargs -r $EDITOR
                 [ "$EDITOR" = "code" ] && exit
         }
 
