@@ -1,0 +1,56 @@
+#!/usr/bin/env sh
+
+# Determining the icon to show depending on the argument passed
+case $1 in
+    dwm) ICONS="dwm" ;;
+    nerd) ICONS="nerd" ;;
+    *) ICONS="none" ;;
+esac
+
+findIcon() {
+    cap=$1
+    stat=$2
+
+    if [ "$ICONS" = "dwm" ]; then
+
+        # Set the correct icon depending on the battery state
+        case $stat in
+            "Discharging") ICON="🔋" ;;
+            "Charging") ICON="🔌" ;;
+            "Unknown") ICON="♻" ;;
+        esac
+
+        # If the battery is full, use this icon
+        if [ "$cap" -eq 100 ]; then
+            ICON="🌕"
+        fi
+
+    elif [ "$ICONS" = "nerd" ]; then
+
+        # Set the correct icon depending on the battery state
+        case $stat in
+            "Discharging") ICON="" ;;
+            "Charging") ICON="" ;;
+            "Unknown") ICON="" ;;
+        esac
+
+        # If the battery is full, use this icon
+        if [ "$cap" -eq 100 ]; then
+            ICON=""
+        fi
+
+    fi
+}
+
+# Iterating over all connected batteries
+for battery in /sys/class/power_supply/BAT?; do
+    # Get its remaining capacity and charge status.
+    capacity=$(cat "$battery"/capacity 2> /dev/null) || break
+    status=$(cat "$battery"/status 2> /dev/null) || break
+
+    # Runing the findIcon script to find the icon
+    findIcon "$capacity" "$status"
+
+    # Print the output to stdout
+    echo "$ICON${capacity}%"
+done

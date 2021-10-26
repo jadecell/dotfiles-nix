@@ -1,0 +1,7 @@
+#!/bin/sh
+
+HOWLONG="$2"
+NUMSECONDSSHAVED="$3"
+calc=$(($HOWLONG - $NUMSECONDSSHAVED))
+ffmpeg -t $calc -i $1 output.mp3
+mv output.mp3 $1

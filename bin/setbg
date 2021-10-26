@@ -1,0 +1,17 @@
+#!/usr/bin/env sh
+
+# This script does the following:
+#	Run by itself, set the wallpaper (at X start).
+#	If given a file, set that as the new wallpaper.
+#	If given a directory, choose random file in it.
+#	If wal is installed, also generates a colorscheme.
+
+# Location of link to wallpaper link.
+bgloc="$HOME/.config/wallpaper"
+
+[ -f "$1" ] && ln -sf "$(readlink -f "$1")" "$bgloc"
+
+[ -d "$1" ] && ln -sf "$(find "$(readlink -f "$1")" -iregex '.*.\(jpg\|jpeg\|png\|gif\)' -type f | shuf -n 1)" "$bgloc" && notify-send -i "$bgloc" "Random Wallpaper chosen."
+
+xwallpaper --stretch "$bgloc"
+notify-send "Wallpaper changed!"

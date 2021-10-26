@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+set -eu
+
+SONG=false
+ICON=" "
+MESSAGE="$ICON No Song Seleted"
+[ "$(mpc status | grep --color=none '^\[playing\]' | cut -d' ' -f1)" = "[playing]" ] && ICON=" " && MESSAGE="$ICON $(mpc current)" && SONG=true
+[ "$(mpc status | grep --color=none '^\[paused\]' | cut -d' ' -f1)" = "[paused]" ] && ICON=" " && MESSAGE="$ICON $(mpc current)" && SONG=true
+
+printf "%s" "$MESSAGE"

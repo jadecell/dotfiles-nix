@@ -1,0 +1,20 @@
+#!/usr/bin/env sh
+
+# mot - make opts toggle
+
+# Run the current script as root with all the arguments if not already being ran as root
+if [ "$(id -u)" -ne "0" ]; then exec sudo "$0" "$@"; fi
+
+THREADSDAY=$(grep -c processor /proc/cpuinfo)
+THREADSPLUSONEDAY=$((THREADSDAY + 1))
+
+THREADSNIGHT=2
+THREADSPLUSONENIGHT=2
+
+if [ "$1" = "day" ]; then
+    sed -i -e "s/MAKEOPTS=\"-j$THREADSPLUSONENIGHT\ -l$THREADSNIGHT\"/MAKEOPTS=\"-j$THREADSPLUSONEDAY\ -l$THREADSDAY\"/g" /etc/portage/make.conf
+    sed -i -e "s/EMERGE_DEFAULT_OPTS=\"--jobs=$THREADSPLUSONENIGHT\ --load-average=$THREADSNIGHT\ --verbose\"/EMERGE_DEFAULT_OPTS=\"--jobs=$THREADSPLUSONEDAY\ --load-average=$THREADSDAY\ --verbose\"/g" /etc/portage/make.conf
+elif [ "$1" = "night" ]; then
+    sed -i -e "s/MAKEOPTS=\"-j$THREADSPLUSONEDAY\ -l$THREADSDAY\"/MAKEOPTS=\"-j$THREADSPLUSONENIGHT -l$THREADSNIGHT\"/g" /etc/portage/make.conf
+    sed -i -e "s/EMERGE_DEFAULT_OPTS=\"--jobs=$THREADSPLUSONEDAY\ --load-average=$THREADSDAY\ --verbose\"/EMERGE_DEFAULT_OPTS=\"--jobs=$THREADSPLUSONENIGHT\ --load-average=$THREADSNIGHT\ --verbose\"/g" /etc/portage/make.conf
+fi

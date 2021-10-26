@@ -1,0 +1,4 @@
+#!/bin/sh
+
+COUNT="$(/bin/cat /home/jackson/.cache/pkgcount)"
+printf " %s" "$COUNT"

@@ -9,7 +9,7 @@ pkgs:
 
         {
           name = "zsh-syntax-highlighting";
-	  src = pkgs.fetchFromGitHub {
+	      src = pkgs.fetchFromGitHub {
 	      owner = "zsh-users";
 	      repo = "zsh-syntax-highlighting";
 	      rev = "0.7.1";
@@ -123,7 +123,8 @@ pkgs:
 	export TERMINAL="alacritty"
 
 	# General
-	export PATH="$PATH:/home/jackson/.config/nixos/bin:/home/jackson/.emacs.d/bin:$(find ~/.local/repos/dotfiles/home/.local/bin -type d -printf %p:)"
+
+	export PATH="$PATH:$(find ~/.config/nixos/bin -type d -printf %p:)"
 	export QT_QPA_PLATFORMTHEME="qt5ct"
 	export FZF_DEFAULT_OPTS="--layout=reverse --height 40%"
 	export SUDO_ASKPASS="$HOME/.config/dmenu/scripts/dmenu-pass.sh"

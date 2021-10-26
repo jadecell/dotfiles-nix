@@ -1,0 +1,30 @@
+#!/usr/bin/env sh
+set -eu
+
+STOP=false
+TOGGLE=false
+case $1 in
+    toggle)
+        TOGGLE=true
+        mpc toggle > /dev/null 2>&1
+        ;;
+
+    next)
+        mpc next > /dev/null 2>&1
+        ;;
+
+    prev)
+        mpc prev > /dev/null 2>&1
+        ;;
+
+    stop)
+        STOP=true
+        mpc stop > /dev/null 2>&1
+        ;;
+esac
+
+CURRENT="$(mpc current)"
+( ! $STOP && ! $TOGGLE ) && notify-send "Now Playing: $CURRENT"
+$TOGGLE && notify-send "Toggled music"
+$STOP && notify-send "Stopped music"
+exit 0

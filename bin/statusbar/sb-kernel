@@ -1,0 +1,13 @@
+#!/usr/bin/env sh
+
+NERDICON=" "
+EMOJI="🐧"
+
+case $1 in
+    dwm) ICON=$EMOJI ;;
+    nerd) ICON=$NERDICON ;;
+    *) ICON="" ;;
+esac
+
+kern="$(uname -r)"
+printf "%s%s\n" "$ICON" "$kern"

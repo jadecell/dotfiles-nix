@@ -1,0 +1,24 @@
+#!/usr/bin/env sh
+
+NERDICON=""
+EMOJI="📦"
+
+case $1 in
+dwm) ICON=$EMOJI ;;
+nerd) ICON=$NERDICON ;;
+*) ICON="" ;;
+esac
+
+cupd="$(/bin/cat /home/jackson/.cache/pkgcount)"
+
+case $BLOCK_BUTTON in
+1)
+	$TERMINAL -e paru -Syu
+	pkill -RTMIN+8 dwmblocks
+	;;
+3) notify-send "📦 Package updates module" "\- Left click to update system
+- Right click to show this menu" ;;
+6) "$TERMINAL" -e "$EDITOR" "$0" ;;
+esac
+
+printf "%s%s\n" "$ICON" "$cupd"

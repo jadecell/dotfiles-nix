@@ -1,0 +1,28 @@
+#!/usr/bin/env sh
+
+printf "1 [ ]) file\n2 [ ]) remote url\n3 [*]) shorten\nChoice: "
+read -r TYPE
+
+case $TYPE in
+    "")
+        TYPE=3
+        ;;
+esac
+case $TYPE in
+    1)
+        echo "File not supported yet"
+        exit 1
+        ;;
+
+    2)
+        echo "File not supported yet"
+        exit 1
+        ;;
+
+    3)
+        printf "URL to shorten: "
+        read -r URL
+        curl -sF "shorten=$URL" https://0x0.st | tr -d '\n' | xclip -selection clipboard
+        notify-send "📋 URL Copied to clipboard" "$URL"
+        ;;
+esac

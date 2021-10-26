@@ -43,6 +43,7 @@
       killall
       wget
       vim
+      bc
       fzf
       ripgrep
       fd

@@ -1,0 +1,26 @@
+#!/usr/bin/env sh
+[ -z "$1" ] && echo "No color inputed" && exit 1
+
+case $1 in
+"black") CODE=color0 ;;
+"lightblack") CODE=color8 ;;
+"red") CODE=color1 ;;
+"lightred") CODE=color9 ;;
+"green") CODE=color2 ;;
+"lightgreen") CODE=color10 ;;
+"yellow") CODE=color3 ;;
+"lightyellow") CODE=color11 ;;
+"blue") CODE=color4 ;;
+"lightblue") CODE=color12 ;;
+"magenta") CODE=color5 ;;
+"lightmagenta") CODE=color13 ;;
+"cyan") CODE=color6 ;;
+"lightcyan") CODE=color14 ;;
+"white") CODE=color7 ;;
+"lightwhite") CODE=color15 ;;
+"background") CODE=background ;;
+"foreground") CODE=foreground ;;
+*) echo "Invalid color!" && exit 1 ;;
+esac
+
+grep "^\*.$CODE": "$XRESOURCES" | cut -d':' -f2 | sed -e 's/\ //g'

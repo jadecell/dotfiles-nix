@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+
+# Run the current script as root with all the arguments if not already being ran as root
+if [ "$(id -u)" -ne "0" ]; then exec sudo "$0" "$@"; fi
+
+emerge -1 --usepkg=n dev-libs/boost sys-devel/llvm sys-devel/clang sys-devel/libtool

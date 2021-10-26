@@ -1,0 +1,8 @@
+#!/usr/bin/env sh
+
+export DMENU_CUSTOM_NF="#ffffff"
+export DMENU_CUSTOM_NB="#1e1e1e"
+export DMENU_CUSTOM_SB="#303030"
+export DMENU_CUSTOM_SF="$(gethex green)"
+export DMENU_PROMPT_COLOR="$(gethex green)"
+export DMENU_ARGUMENTS="-nb $DMENU_CUSTOM_NB -nf $DMENU_CUSTOM_NF -sb $DMENU_CUSTOM_SB -sf $DMENU_CUSTOM_SF -i"

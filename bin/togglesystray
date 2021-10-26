@@ -1,0 +1,3 @@
+#!/bin/sh
+set -eu
+( pidof stalonetray >/dev/null 2>&1 && killall stalonetray ) || stalonetray &

@@ -1,0 +1,68 @@
+#!/usr/bin/env sh
+set -eu
+
+# colors
+BLACK='\033[0;30m'
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
+BLUE='\033[0;34m'
+MAGENTA='\033[0;35m'
+CYAN='\033[0;36m'
+GRAY='\033[0;37m'
+LIGHTBLACK='\033[1;30m'
+LIGHTRED='\033[1;31m'
+LIGHTGREEN='\033[1;32m'
+LIGHTYELLOW='\033[1;33m'
+LIGHTBLUE='\033[1;34m'
+LIGHTMAGENTA='\033[1;35m'
+LIGHTCYAN='\033[1;36m'
+LIGHTGRAY='\033[1;37m' NC='\033[0m'
+info() {
+	printf "\n[+] ${CYAN}$1${NC}\n"
+}
+
+if [ -x /usr/bin/pacman ]; then
+	info "Beginning upgrade"
+	paru -Syu
+	echo "0" >/home/jackson/.cache/pkgcount
+	#pkill -RTMIN+8 "dwmblocks"
+else
+	# Run the current script as root with all the arguments if not already being ran as root
+	if [ "$(id -u)" -ne "0" ]; then exec sudo "$0" "$@"; fi
+
+	info "Beginning upgrade"
+
+	PREEMERGEGCCTIME="$(genlop gcc | tail -2 | cut -d' ' -f9 | tr -d '\n')"
+	info "Running eix-sync to sync the repos"
+	eix-sync >/dev/null 2>&1
+
+	info "Running the main update"
+	emerge -auDU --with-bdeps=y --autounmask-continue @world
+	echo "0" >/home/jackson/.cache/pkgcount
+	pkill -RTMIN+8 "dwmblocks"
+
+	info "Running emerge @preserved-rebuild if needed"
+	emerge @preserved-rebuild
+
+	POSTEMERGEGCCTIME="$(genlop gcc | tail -2 | cut -d' ' -f9 | tr -d '\n')"
+	if [ "$PREEMERGEGCCTIME" != "$POSTEMERGEGCCTIME" ]; then
+
+		info "Detected a gcc update"
+		info "Selecting the new gcc version"
+
+		ESELECTGCCSETNUMBER="$(eselect gcc list | tail -1 | tr '[' ' ' | tr ']' ' ' | cut -d' ' -f3)"
+		eselect gcc set "$ESELECTGCCSETNUMBER" >/dev/null 2>&1
+
+		. /etc/profile
+
+		info "Rebuilding dev-libs/boost, sys-devel/llvm, sys-devel/clang and sys-devel/libtool"
+		emerge -1 --usepkg=n dev-libs/boost sys-devel/llvm sys-devel/clang sys-devel/libtool
+	fi
+
+	info "Running smart-live-rebuild"
+	smart-live-rebuild
+fi
+
+printf "\nUpgrade complete.\nPress ${CYAN}<Enter>${NC} to exit window.\n\n"
+read -r _

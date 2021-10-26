@@ -1,0 +1,36 @@
+#!/usr/bin/env sh
+
+# Defining the icons to be used
+NERDICON=""
+EMOJI="🕘"
+
+# Determining the icon to show depending on the argument passed
+ICON=$NERDICON
+if [ "$1" = "dwm" ]; then
+    case "$(date '+%I')" in
+        "00") ICON="🕛" ;;
+        "01") ICON="🕐" ;;
+        "02") ICON="🕑" ;;
+        "03") ICON="🕒" ;;
+        "04") ICON="🕓" ;;
+        "05") ICON="🕔" ;;
+        "06") ICON="🕕" ;;
+        "07") ICON="🕖" ;;
+        "08") ICON="🕗" ;;
+        "09") ICON="🕘" ;;
+        "10") ICON="🕙" ;;
+        "11") ICON="🕚" ;;
+        "12") ICON="🕛" ;;
+    esac
+fi
+
+# Dwmblocks mouse event handling
+case $BLOCK_BUTTON in
+    1) $TERMINAL -e calcurse ;;
+    3) notify-send "📅 Calendar and Time module" "\- Left click for calcurse
+- Right click to show this menu " ;;
+    6) "$TERMINAL" -e "$EDITOR" "$0" ;;
+esac
+
+dte="$(date +"%a, %b %d %Y (%H:%M:%S)" | sed 's/  / /g')"
+printf "%s %s\n" "$ICON" "$dte"

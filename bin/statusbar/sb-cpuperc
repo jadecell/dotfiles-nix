@@ -1,0 +1,20 @@
+#!/usr/bin/env sh
+
+NERDICON=" "
+EMOJI="🖥"
+
+case $1 in
+dwm) ICON=$EMOJI ;;
+nerd) ICON=$NERDICON ;;
+*) ICON="" ;;
+esac
+
+case $BLOCK_BUTTON in
+1) $TERMINAL -e htop ;;
+3) notify-send "🖥 CPU percentage module" "\- Left click to open htop
+- Right click to show this menu" ;;
+6) "$TERMINAL" -e "$EDITOR" "$0" ;;
+esac
+
+perc=$(top -bn1 | grep "Cpu(s)" | sed "s/.*, *\([0-9.]*\)%* id.*/\1/" | awk '{print 100 - $1"%"}')
+printf "%s%s\n" "$ICON" "$perc"

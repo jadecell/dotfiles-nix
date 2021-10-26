@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+
+# This script is the SUDO_ASKPASS variable, meaning that it will be used as a
+# password prompt if needed.
+
+dmenu -P -p "Enter sudo password" <&- && echo

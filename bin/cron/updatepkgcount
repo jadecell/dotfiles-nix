@@ -1,0 +1,10 @@
+#!/bin/sh
+# Run the current script as root with all the arguments if not already being ran as root
+
+if [ -x /usr/bin/pacman ]; then
+	checkupdates | wc -l >/home/jackson/.cache/pkgcount
+else
+	if [ "$(id -u)" -ne "0" ]; then exec sudo "$0" "$@"; fi
+	eix-sync >/dev/null 2>&1
+	emerge -upDU --with-bdeps=y @world | grep Total | cut -d' ' -f2 >/home/jackson/.cache/pkgcount
+fi

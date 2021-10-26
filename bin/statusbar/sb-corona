@@ -1,0 +1,27 @@
+#!/usr/bin/env sh
+
+updateInfo() {
+    curl -s https://corona-stats.online/ca > ~/.cache/corona
+}
+
+showInfo() {
+    grep "Canada" ~/.cache/corona \
+        | sed 's/\x1b\[[0-9;]*m//g' \
+        | sed "s/\s*//g ; s/║//g; s/│/;/g" \
+        | awk -F';' '{print "😷" $8 " 💀" $5}'
+}
+
+case $BLOCK_BUTTON in
+    1) $TERMINAL -e less -Srf ~/.cache/corona ;;
+    2) updateInfo && showInfo ;;
+    3) notify-send "🏥 Coronavirus module" "\- Left click for full chart.
+- Middle click to update stats.
+- Right Click shows this menu
+😷: Number of active cases
+💀: Total deaths" ;;
+    6) "$TERMINAL" -e "$EDITOR" "$0" ;;
+esac
+
+[ "$(stat -c %y ~/.cache/corona 2> /dev/null | cut -d' ' -f1)" != "$(date '+%Y-%m-%d')" ] && updateInfo
+
+showInfo

@@ -1,0 +1,3 @@
+#!/bin/bash
+
+sxiv -r -q -t -o ~/.local/repos/wallpapers/*

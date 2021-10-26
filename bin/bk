@@ -1,0 +1,73 @@
+#!/usr/bin/env bash
+
+# Run the current script as root with all the arguments if not already being ran as root
+if [ "$(id -u)" -ne "0" ]; then exec sudo "$0" "$@"; fi
+
+CPUTHREADS=$(grep -c processor /proc/cpuinfo)
+CPUTHREADSPLUSONE=$((CPUTHREADS + 1))
+KERNELCONFIGLOCATION="/usr/src/linux/.config"
+KERNELCONFIGDIRECTORY="$(echo $KERNELCONFIGLOCATION | cut -d'.' -f1)"
+KERNELCONFIGDESTINATION="/home/jackson/.local/repos/dotfiles/extra/kernelconfigs"
+NEWKERNELVERSION="$(eselect kernel list | tail -1 | cut -d'-' -f2)"
+CURRENTKERNELVERSION="$(uname -r | tr '-' ' ' | cut -d' ' -f1)"
+
+if [ "$NEWKERNELVERSION" != "$CURRENTKERNELVERSION" ]; then
+	eselect kernel set "linux-$NEWKERNELVERSION-gentoo"
+	cd "$KERNELCONFIGDIRECTORY" || exit 1
+	make mrproper
+	cp "$KERNELCONFIGDESTINATION/$CURRENTKERNELVERSION-gentoo-$(hostname).config" "$KERNELCONFIGLOCATION"
+	make olddefconfig
+fi
+
+cd "$KERNELCONFIGDIRECTORY" && make menuconfig
+
+clear
+printf "Want to build the newly configured kernel [Y/n]? "
+read -r BUILDNEWKERNEL
+
+case $BUILDNEWKERNEL in
+Y | y)
+	SWITCHBUILDKERNEL=true
+	;;
+N | n)
+	SWITCHBUILDKERNEL=false
+	;;
+"")
+	SWITCHBUILDKERNEL=true
+	;;
+*)
+	echo "Invalid option"
+	exit 1
+	;;
+esac
+
+$SWITCHBUILDKERNEL && make -j$CPUTHREADSPLUSONE && make modules_install
+emerge @module-rebuild
+genkernel --compress-initramfs --firmware --microcode-initramfs --kernel-config=$KERNELCONFIGLOCATION initramfs
+BUILTKERNELVERSION="$(grep 'Linux/x86' $KERNELCONFIGLOCATION | tr '-' ' ' | cut -d' ' -f3)"
+cp -f $KERNELCONFIGLOCATION "${KERNELCONFIGDESTINATION}/${BUILTKERNELVERSION}-gentoo-$(hostname).config"
+
+mount /boot
+mv /usr/src/linux/arch/x86/boot/bzImage /boot/EFI/gentoo/bootx64.efi
+mv /boot/initramfs* /boot/EFI/gentoo/initramfs.img
+
+printf "Reboot now [Y/n]? "
+read -r REBOOTNOW
+
+case $REBOOTNOW in
+Y | y)
+	SWITCHREBOOTNOW=true
+	;;
+N | n)
+	SWITCHREBOOTNOW=false
+	;;
+"")
+	SWITCHREBOOTNOW=true
+	;;
+*)
+	echo "Invalid option"
+	exit 1
+	;;
+esac
+
+$SWITCHREBOOTNOW && reboot

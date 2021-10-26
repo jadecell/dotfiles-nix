@@ -1,0 +1,16 @@
+#!/usr/bin/env sh
+
+hostname="$(hostname)"
+case $hostname in
+orion) temp=$(sensors | grep Tctl | cut -d'+' -f2 | sed -e 's/\ //g') ;;
+nova) temp=$(sensors | grep 'temp1:' | head -1 | cut -d'+' -f2 | sed -e 's/\ //g') ;;
+esac
+
+case $BLOCK_BUTTON in
+1) $TERMINAL -e htop ;;
+3) notify-send "🌡 CPU temperature module" "\- Left click to open htop
+- Right click to show this menu" ;;
+6) "$TERMINAL" -e "$EDITOR" "$0" ;;
+esac
+
+echo "🔥$temp"

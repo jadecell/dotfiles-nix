@@ -1,0 +1,37 @@
+#!/usr/bin/env sh
+
+NERDMUTE="婢 "
+NERDUNMUTE=" "
+
+EMOJIMUTE="🔇"
+EMOJIUNMUTE="🔊"
+
+case $1 in
+    dwm) ICONS="dwm" ;;
+    nerd) ICONS="nerd" ;;
+    *) ICONS="" ;;
+esac
+
+vol=$(pamixer --get-volume)
+if [ "$(pamixer --get-mute)" = "true" ]; then
+
+    [ "$ICONS" = "dwm" ] && ICON="$EMOJIMUTE"
+    [ "$ICONS" = "nerd" ] && ICON="$NERDMUTE"
+    [ -z "$ICONS" ] && ICON=""
+
+else
+
+    [ "$ICONS" = "dwm" ] && ICON="$EMOJIUNMUTE"
+    [ "$ICONS" = "nerd" ] && ICON="$NERDUNMUTE"
+    [ -z "$ICONS" ] && ICON=""
+
+fi
+
+case $BLOCK_BUTTON in
+    1) pavucontrol ;;
+    3) notify-send "📢 Volume module" "\- Left click to open pavucontrol
+- Right click to show this menu" ;;
+    6) "$TERMINAL" -e "$EDITOR" "$0" ;;
+esac
+
+printf "%s%s\n" "$ICON" "${vol}%"

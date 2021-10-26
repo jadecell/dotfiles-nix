@@ -1,0 +1,4 @@
+#!/bin/sh
+
+source $HOME/.config/dmenu/settings
+dmenu_run $DMENU_ARUMENTS

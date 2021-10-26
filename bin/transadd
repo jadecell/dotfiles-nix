@@ -1,0 +1,22 @@
+#!/usr/bin/env sh
+
+# Mimeapp script for adding torrent to transmission-daemon, but will also start the daemon first if not running.
+
+startTransmission() {
+  # If VPN is down, then start it
+  [ -n "$(sed 's/.*/🔒/' /sys/class/net/wg*/operstate 2> /dev/null)" ] || ( ~/.local/bin/togglevpn && sleep 6 )
+
+  # Get VPN IP to bind to
+  bind_address=$(ip addr show wg-mullvad | grep inet | awk '{print $2}' | head -1 | cut -d'/' -f1)
+
+  # Start transmission-daemon
+  transmission-daemon --rpc-bind-address=127.0.0.1 --bind-address-ipv4=$bind_address
+
+  notify-send "transmission-daemon started and bound to address $bind_address"
+}
+
+# transmission-daemon sometimes fails to take remote requests in its first moments, hence the sleep.
+pidof transmission-daemon >/dev/null || (startTransmission && sleep 3 && pkill -RTMIN+10 "dwmblocks")
+
+# Add the torrent
+transmission-remote -a "$@" && notify-send "🔽 Torrent added."

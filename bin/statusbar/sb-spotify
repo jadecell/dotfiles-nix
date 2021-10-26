@@ -1,0 +1,19 @@
+#!/usr/bin/env sh
+set -eu
+
+which playerctl > /dev/null 2>&1 || echo "Playerctl not found on the system, please install it."
+
+FORMAT="🔀{{ title }} - {{ artist }}"
+
+PLAYERCTL_STATUS=$(playerctl --player=spotify status 2> /dev/null)
+
+[ $? -eq 0 ] && STATUS=$PLAYERCTL_STATUS
+
+case "$STATUS" in
+    "")
+        echo $STATUS
+        ;;
+    *)
+        playerctl --player=spotify metadata --format "$FORMAT"
+        ;;
+esac

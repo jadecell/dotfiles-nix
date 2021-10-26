@@ -1,0 +1,9 @@
+#!/usr/bin/env sh
+
+ESSID="$(nmcli -t active,ssid dev wifi | grep -E '^yes' | cut -d"'" -f2 | sed -e 's/yes\://g')"
+SYMBOLON="直"
+SYMBOLOFF="睊"
+
+[ -n "$ESSID" ] && SYMBOL=$SYMBOLON
+[ -z "$ESSID" ] && SYMBOL=$SYMBOLOFF && ESSID="Disconnected"
+printf "%s%s\n" "$SYMBOL" "$ESSID"

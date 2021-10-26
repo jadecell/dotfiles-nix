@@ -1,0 +1,13 @@
+#!/usr/bin/env sh
+
+STATE="Disconnected"
+if [ -f $HOME/.cache/vpnconnection ]; then
+    . $HOME/.cache/vpnconnection
+
+    if [ $VPNCONNECTION = true ]; then
+        STATE="Connected"
+    else
+        STATE="Disconnected"
+    fi
+fi
+printf "%s" "$STATE"

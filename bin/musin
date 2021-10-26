@@ -1,0 +1,62 @@
+#!/usr/bin/env bash
+set -eu
+
+# colors
+BLACK='\033[0;30m'
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
+BLUE='\033[0;34m'
+MAGENTA='\033[0;35m'
+CYAN='\033[0;36m'
+GRAY='\033[0;37m'
+LIGHTBLACK='\033[1;30m'
+LIGHTRED='\033[1;31m'
+LIGHTGREEN='\033[1;32m'
+LIGHTYELLOW='\033[1;33m'
+LIGHTBLUE='\033[1;34m'
+LIGHTMAGENTA='\033[1;35m'
+LIGHTCYAN='\033[1;36m'
+LIGHTGRAY='\033[1;37m'
+NC='\033[0m'
+
+print() {
+  printf "\n[+] ${MAGENTA}${1}${NC}\n\n"
+}
+
+error() {
+  printf "\n[-] ${RED}${1}${NC}\n\n" && exit 1  
+}
+
+input() {
+  [ "$1" = "would" ] && placeHolder="Would you like to"
+  [ "$1" = "input" ] && placeHolder="Please input the"
+  printf "\n[+] ${CYAN}${placeHolder} ${2}${NC}: "
+  read -r $3
+}
+
+if [ $# -eq 0 ]; then
+  error "Please supply a file"
+fi
+
+fullName="$1"
+
+input "input" "new name of the file" newName
+mv "$fullName" "${newName}.mp3"
+
+newNameFull="${newName}.mp3"
+input "input" "number of minutes ${newNameFull} is" numMinutes
+input "input" "number of seconds ${newNameFull} is" numSeconds
+input "input" "number of seconds to be shaved" numSecondsToBeShaved
+
+totalSeconds=$(($(($numMinutes * 60)) + numSeconds))
+trimaudio "$newNameFull" "$totalSeconds" "$numSecondsToBeShaved"
+
+input "input" "title" songTitle
+input "input" "artist" songArtist
+input "input" "album" songAlbum
+input "input" "track number" songTrackNumber
+input "input" "number of tracks" songNumberOfTracks
+input "input" "date of recording" songDate
+
+tag -a "$songArtist" -t "$songTitle" -A "$songAlbum" -n "$songTrackNumber" -d "$songDate" -N "$songNumberOfTracks" "$newNameFull"

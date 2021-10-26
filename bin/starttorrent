@@ -1,0 +1,23 @@
+#!/bin/sh
+set -eu
+
+start() {
+    
+  # Kill transmission-daemon if it is running
+  killall transmission-daemon && notify-send "Closing all existing transmission-daemon processes ..."
+
+  # If VPN is down, then start it
+  [ -n "$(sed 's/.*/🔒/' /sys/class/net/wg*/operstate 2> /dev/null)" ] || ( ~/.local/bin/togglevpn && sleep 6 )
+
+  # Get VPN IP to bind to
+  bind_address=$(ip addr show wg-mullvad | grep inet | awk '{print $2}' | head -1 | cut -d'/' -f1)
+
+  # Start transmission-daemon
+  transmission-daemon --rpc-bind-address=127.0.0.1 --bind-address-ipv4=$bind_address
+
+  notify-send "transmission-daemon started and bound to address $bind_address"
+
+}
+
+pidof transmission-daemon >/dev/null 2>&1 && notify-send "Transmission-daemon is already started" && exit 0
+start && pkill -RTMIN+10 "dwmblocks" || notify-send "Transmission-daemon is already started"

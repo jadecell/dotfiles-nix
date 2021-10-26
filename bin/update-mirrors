@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+
+# Run the current script as root with all the arguments if not already being ran as root
+if [ "$(id -u)" -ne "0" ]; then exec sudo "$0" "$@"; fi
+
+mv /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
+reflector --country Canada --country US --age 2 --protocol https --sort rate --save /etc/pacman.d/mirrorlist > /dev/null 2>&1 && printf "\033[0;32mMirror list updated!\n" || printf "\033[0;31mMirror list syncing failed!\n"
