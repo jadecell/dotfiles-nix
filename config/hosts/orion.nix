@@ -18,14 +18,6 @@
       fsType = "ext4";
     };
 
-  #fileSystems."/home/jackson/Media" =
-  #  { device = "/dev/disk/by-uuid/48fcb030-45da-4b60-9036-bb335ba9aa92";
-  #    fsType = "ext4";
-  #    options = [
-#	"user"
-#	"default"
-#      ];
-#    };
   fileSystems."/home/jackson/Media" = {
     device = "/dev/disk/by-uuid/48fcb030-45da-4b60-9036-bb335ba9aa92";
     fsType = "ext4";
