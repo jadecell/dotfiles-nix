@@ -20,6 +20,9 @@ LIGHTCYAN='\033[1;36m'
 LIGHTGRAY='\033[1;37m'
 NC='\033[0m'
 
+# Set the hostname
+hostname="$(hostname)"
+
 print() {
   printf "\n[+] ${GREEN}${1}${NC}\n\n"
 }
@@ -49,13 +52,13 @@ cd "$NIXOS_CONFIG_DIR"
 
 if [ $updateoption ]; then
   sudo nix flake update
-  sudo nixos-rebuild switch --flake .#
+  sudo nixos-rebuild switch --flake .#$hostname
   print "Successfully updated system!"
   exit 0
 fi
 
 if [ $switchoption ]; then
-  sudo nixos-rebuild switch --flake .#
+  sudo nixos-rebuild switch --flake .#$hostname
   print "Successfully switched system!"
   exit 0
 fi

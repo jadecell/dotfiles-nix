@@ -7,7 +7,7 @@ start() {
   killall transmission-daemon && notify-send "Closing all existing transmission-daemon processes ..."
 
   # If VPN is down, then start it
-  [ -n "$(sed 's/.*/🔒/' /sys/class/net/wg*/operstate 2> /dev/null)" ] || ( ~/.local/bin/togglevpn && sleep 6 )
+  [ -n "$(sed 's/.*/🔒/' /sys/class/net/wg*/operstate 2> /dev/null)" ] || ( togglevpn && sleep 6 )
 
   # Get VPN IP to bind to
   bind_address=$(ip addr show wg-mullvad | grep inet | awk '{print $2}' | head -1 | cut -d'/' -f1)

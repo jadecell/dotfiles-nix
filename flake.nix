@@ -47,43 +47,84 @@
  
   in {
     nixosConfigurations = {
+
+      # Main desktop
       orion = lib.nixosSystem {
-	inherit system;
-	
-	modules = [
-	  ./configuration.nix ./config/packages.nix
-          home-manager.nixosModules.home-manager {
-           home-manager.useGlobalPkgs = true;
-           home-manager.useUserPackages = true;
-           home-manager.users.jackson = import ./config/home.nix;
-           nixpkgs.overlays = [ 
+        inherit system;
+        
+        modules = [
+        ./configuration.nix ./config/packages.nix ./config/hosts/orion.nix
+            home-manager.nixosModules.home-manager {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.jackson = import ./config/home.nix;
+            nixpkgs.overlays = [ 
 
-	     # Dwm
-	     (final: prev: {
-		   dwm = prev.dwm.overrideAttrs (o: {
-	           src = dwm;
-		   });
-             })
+            # Dwm
+            (final: prev: {
+            dwm = prev.dwm.overrideAttrs (o: {
+                src = dwm;
+            });
+                })
 
-	     (final: prev: {
-		   dwmblocks = prev.dwmblocks.overrideAttrs (o: {
-	           src = dwmblocks;
-		   });
-             })
+            (final: prev: {
+            dwmblocks = prev.dwmblocks.overrideAttrs (o: {
+                src = dwmblocks;
+            });
+                })
 
-	     (final: prev: {
-		   dmenu = prev.dmenu.overrideAttrs (o: {
-	           src = dmenu;
-		   });
-             })
+            (final: prev: {
+            dmenu = prev.dmenu.overrideAttrs (o: {
+                src = dmenu;
+            });
+                })
 
-             # Neovim nightly  
-             nur.overlay neovim-nightly-overlay.overlay 
+            # Neovim nightly  
+            nur.overlay neovim-nightly-overlay.overlay 
 
-           ];
-	  }
-	];
+            ];
+          }
+        ];
       };
+
+      nova = lib.nixosSystem {
+        inherit system;
+        
+        modules = [
+        ./configuration.nix ./config/packages.nix ./config/hosts/orion.nix
+            home-manager.nixosModules.home-manager {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.jackson = import ./config/home.nix;
+            nixpkgs.overlays = [ 
+
+            # Dwm
+            (final: prev: {
+            dwm = prev.dwm.overrideAttrs (o: {
+                src = dwm;
+            });
+                })
+
+            (final: prev: {
+            dwmblocks = prev.dwmblocks.overrideAttrs (o: {
+                src = dwmblocks;
+            });
+                })
+
+            (final: prev: {
+            dmenu = prev.dmenu.overrideAttrs (o: {
+                src = dmenu;
+            });
+                })
+
+            # Neovim nightly  
+            nur.overlay neovim-nightly-overlay.overlay 
+
+            ];
+          }
+        ];
+      };
+
     };
   };
 }

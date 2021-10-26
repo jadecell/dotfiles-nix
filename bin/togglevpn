@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-if [ -n "$(sed "s/.*/🔒/" /sys/class/net/tun*/operstate 2> /dev/null)" ]; then
+if [ -n "$(sed "s/.*/🔒/" /sys/class/net/wg*/operstate 2> /dev/null)" ]; then
 	pidof transmission-daemon && notify-send "🔒Mullvad VPN" "Please stop transmisson-daemon before trying that." && exit 0
         mullvad disconnect
 	notify-send "🔓Mullvad VPN" "Disconnected from mullvad's network"

@@ -1,10 +1,6 @@
 #!/bin/sh
 # A dmenu wrapper script for system functions.
-case "$(readlink -f /sbin/init)" in
-*systemd*) ctl='systemctl' ;;
-*) ctl='loginctl' ;;
-esac
-
+ctl="systemctl"
 case "$(printf "🚪leave dwm\n🔒lock\n ♻ renew dwm\n🐻hibernate\n💤sleep\n🔃reboot\n🔃firmware reboot\n 🖥shutdown\n📺 display off" | dmenu -i -p 'Action: ')" in
 '🚪leave dwm') kill -9 "$(pidof dwm)" ;;
 '🔒lock') slock ;;
@@ -12,7 +8,7 @@ case "$(printf "🚪leave dwm\n🔒lock\n ♻ renew dwm\n🐻hibernate\n💤slee
 '🐻hibernate') slock $ctl hibernate ;;
 '💤sleep') slock $ctl suspend ;;
 '🔃reboot') reboot ;;
-'🔃firmware reboot') $ctl reboot --firmware ;;
+'🔃firmware reboot') reboot --firmware ;;
 '🖥shutdown') shutdown ;;
 '📺display off') xset dpms force off ;;
 *) exit 1 ;;
