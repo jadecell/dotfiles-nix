@@ -37,6 +37,7 @@ in
     ./mpd/mpd.nix
     ./x11/xresources.nix
     ./emoji/emoji.nix
+    ./application-desktops/desktops.nix
   ];
   programs.zsh = zshsettings pkgs;
   programs.firefox = firefoxsettings pkgs;
