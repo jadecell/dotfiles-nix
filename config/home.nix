@@ -36,6 +36,7 @@ in
     ./fixmonitors/fixmonitors.nix 
     ./mpd/mpd.nix
     ./x11/xresources.nix
+    ./emoji/emoji.nix
   ];
   programs.zsh = zshsettings pkgs;
   programs.firefox = firefoxsettings pkgs;
