@@ -50,6 +50,7 @@ esac
 
 cd "$NIXOS_CONFIG_DIR"
 
+exit 0
 if [ $updateoption ]; then
   sudo nix flake update
   sudo nixos-rebuild switch --flake .#$hostname
