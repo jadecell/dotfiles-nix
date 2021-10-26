@@ -1,13 +1,29 @@
 {
   "nodes": {
+    "dmenu": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1635225131,
+        "narHash": "sha256-yKgRboBcOpaOru+tc0SVjOhtwLhDWck5QcRgAPsbf1E=",
+        "owner": "jadecell",
+        "repo": "dmenu",
+        "rev": "2ef721192e1dd4054121499fd5fc536de4e6e20f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "jadecell",
+        "repo": "dmenu",
+        "type": "github"
+      }
+    },
     "dwm": {
       "flake": false,
       "locked": {
-        "lastModified": 1634973339,
-        "narHash": "sha256-nngU3Wog91edVGjO4sT8G+CsvNmPkztEjMD1rybzovM=",
+        "lastModified": 1635224719,
+        "narHash": "sha256-zPuOCEbst4Fz39qdi3xE/pTO7XND4Zw2LFxoeL5Ot4w=",
         "owner": "jadecell",
         "repo": "dwm",
-        "rev": "25e2e311dd0c85acc1ab25de7171e9c351fd496c",
+        "rev": "3c18a91c6622f927b4be817f52c74d15811f9a78",
         "type": "github"
       },
       "original": {
@@ -162,6 +178,7 @@
     },
     "root": {
       "inputs": {
+        "dmenu": "dmenu",
         "dwm": "dwm",
         "dwmblocks": "dwmblocks",
         "home-manager": "home-manager",
