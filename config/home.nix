@@ -35,6 +35,7 @@ in
   imports = [ 
     ./fixmonitors/fixmonitors.nix 
     ./mpd/mpd.nix
+    ./x11/xresources.nix
   ];
   programs.zsh = zshsettings pkgs;
   programs.firefox = firefoxsettings pkgs;
