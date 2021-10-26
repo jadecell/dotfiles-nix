@@ -34,6 +34,7 @@ in
   # Source extra files to clean this one up
   imports = [ 
     ./fixmonitors/fixmonitors.nix 
+    ./mpd/mpd.nix
   ];
   programs.zsh = zshsettings pkgs;
   programs.firefox = firefoxsettings pkgs;

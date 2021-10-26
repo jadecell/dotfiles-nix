@@ -90,7 +90,8 @@
       mlocate
       git
       dunst
-      neovim-nightly
+      #neovim-nightly
+      neovim
       libnotify
       wmname
 
@@ -107,6 +108,10 @@
       gcc
       lazygit
 
+      # Language servers for neovim; change these to whatever languages you code in
+      # Please note: if you remove any of these, make sure to also remove them from nvim/config/nvim/lua/lsp.lua!!
+      rnix-lsp
+      sumneko-lua-language-server
     ];
 
 }

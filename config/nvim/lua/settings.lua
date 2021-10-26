@@ -2,10 +2,14 @@ local opt = vim.opt
 local g = vim.g
 
 -- Lazy load everything!
-dofile("/home/notus/.config/nixos/config/nvim/lua/galaxyline.lua")
-dofile("/home/notus/.config/nixos/config/nvim/lua/lsp.lua")
-dofile("/home/notus/.config/nixos/config/nvim/lua/nvim-tree.lua")
-dofile("/home/notus/.config/nixos/config/nvim/lua/plugins.lua")
+dofile(os.getenv("NIXOS_CONFIG_DIR") .. "config/nvim/lua/galaxyline.lua")
+dofile(os.getenv("NIXOS_CONFIG_DIR") .. "config/nvim/lua/lsp.lua")
+dofile(os.getenv("NIXOS_CONFIG_DIR") .. "config/nvim/lua/nvim-tree.lua")
+dofile(os.getenv("NIXOS_CONFIG_DIR") .. "config/nvim/lua/plugins.lua")
+dofile(os.getenv("NIXOS_CONFIG_DIR") .. "config/nvim/lua/treesitter.lua")
+
+-- Set night
+g.tokyonight_style = "night"
 
 vim.cmd [[
     set nowrap
@@ -14,7 +18,7 @@ vim.cmd [[
     set noerrorbells
     set noswapfile
     
-    colorscheme dusk
+    colorscheme tokyonight
     function! Preserve(command)
       let w = winsaveview()
       execute a:command

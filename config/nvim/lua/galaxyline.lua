@@ -1,5 +1,5 @@
  -- This file configures galaxyline, a fast and small statusline for nvim.
- -- The configuration was taken from github.com/siduck76/neovim-dotfiles/ 
+ -- The configuration was taken from github.com/siduck76/neovim-dotfiles/
  -- All I did was change the colors. Full credit goes to siduck76
 
 local gl = require("galaxyline")
@@ -8,16 +8,35 @@ local gl = require("galaxyline")
     gl.short_line_list = {" "} -- keeping this table { } as empty will show inactive statuslines
 
     local colors = {
-        bg = "#2e303e",
-        line_bg = "#2e303e",
-        fg = "#e3e6ee",
-        green = "#29d398",
-        orange = "#efb993",
-        red = "#e95678",
-        lightbg = "#2e303e",
-        lightbasdfg = "#393b4d",
-        nord = "#9699b7",
-        greenYel = "#efb993"
+        bg_dark = "#1f2335",
+        bg = "#24283b",
+        bg_highlight = "#292e42",
+        terminal_black = "#414868",
+        fg = "#c0caf5",
+        fg_dark = "#a9b1d6",
+        fg_gutter = "#3b4261",
+        dark3 = "#545c7e",
+        comment = "#565f89",
+        dark5 = "#737aa2",
+        blue0 = "#3d59a1",
+        blue = "#7aa2f7",
+        cyan = "#7dcfff",
+        blue1 = "#2ac3de",
+        blue2 = "#0db9d7",
+        blue5 = "#89ddff",
+        blue6 = "#B4F9F8",
+        blue7 = "#394b70",
+        magenta = "#bb9af7",
+        magenta2 = "#ff007c",
+        purple = "#9d7cd8",
+        orange = "#ff9e64",
+        yellow = "#e0af68",
+        green = "#9ece6a",
+        green1 = "#73daca",
+        green2 = "#41a6b5",
+        teal = "#1abc9c",
+        red = "#f7768e",
+        red1 = "#db4b4b",
     }
 
     gls.left[1] = {
@@ -25,18 +44,18 @@ local gl = require("galaxyline")
             provider = function()
                 return " "
             end,
-            highlight = {colors.nord, colors.bg}
+            highlight = {colors.fg, colors.bg}
         }
     }
 
     gls.left[2] = {
         statusIcon = {
             provider = function()
-                return "  "
+                return "  "
             end,
             highlight = {colors.fg, colors.bg},
             separator = " ",
-            separator_highlight = {colors.lightbg, colors.lightbg}
+            separator_highlight = {colors.lightbg, colors.bg}
         }
     }
 
@@ -44,7 +63,7 @@ local gl = require("galaxyline")
         FileIcon = {
             provider = "FileIcon",
             condition = buffer_not_empty,
-            highlight = {require("galaxyline.provider_fileinfo").get_file_icon_color, colors.lightbg}
+            highlight = {require("galaxyline.provider_fileinfo").get_file_icon_color, colors.bg}
         }
     }
 
@@ -52,17 +71,7 @@ local gl = require("galaxyline")
         FileName = {
             provider = {"FileName", "FileSize"},
             condition = buffer_not_empty,
-            highlight = {colors.fg, colors.lightbg}
-        }
-    }
-
-    gls.left[5] = {
-        teech = {
-            provider = function()
-                return " "
-            end,
-            separator = " ",
-            highlight = {colors.lightbg, colors.bg}
+            highlight = {colors.fg, colors.bg}
         }
     }
 
@@ -74,45 +83,45 @@ local gl = require("galaxyline")
         return false
     end
 
-    gls.left[6] = {
+    gls.left[5] = {
         DiffAdd = {
             provider = "DiffAdd",
             condition = checkwidth,
             icon = "   ",
-            highlight = {colors.greenYel, colors.line_bg}
+            highlight = {colors.green, colors.bg}
         }
     }
 
-    gls.left[7] = {
+    gls.left[6] = {
         DiffModified = {
             provider = "DiffModified",
             condition = checkwidth,
             icon = " ",
-            highlight = {colors.orange, colors.line_bg}
+            highlight = {colors.orange, colors.bg}
         }
     }
 
-    gls.left[8] = {
+    gls.left[7] = {
         DiffRemove = {
             provider = "DiffRemove",
             condition = checkwidth,
             icon = " ",
-            highlight = {colors.lightbg, colors.line_bg}
+            highlight = {colors.red, colors.bg}
         }
     }
 
-    gls.left[9] = {
+    gls.left[8] = {
         LeftEnd = {
             provider = function()
                 return " "
             end,
             separator = " ",
-            separator_highlight = {colors.line_bg, colors.line_bg},
-            highlight = {colors.line_bg, colors.line_bg}
+            separator_highlight = {colors.bg, colors.bg},
+            highlight = {colors.bg, colors.bg}
         }
     }
 
-    gls.left[10] = {
+    gls.left[9] = {
         DiagnosticError = {
             provider = "DiagnosticError",
             icon = "  ",
@@ -120,12 +129,12 @@ local gl = require("galaxyline")
         }
     }
 
-    gls.left[11] = {
+    gls.left[10] = {
         Space = {
             provider = function()
                 return " "
             end,
-            highlight = {colors.line_bg, colors.line_bg}
+            highlight = {colors.bg, colors.bg}
         }
     }
 
@@ -133,7 +142,7 @@ local gl = require("galaxyline")
         DiagnosticWarn = {
             provider = "DiagnosticWarn",
             icon = "  ",
-            highlight = {colors.red, colors.bg}
+            highlight = {colors.orange, colors.bg}
         }
     }
 
@@ -143,7 +152,7 @@ local gl = require("galaxyline")
                 return "   "
             end,
             condition = require("galaxyline.provider_vcs").check_git_workspace,
-            highlight = {colors.green, colors.line_bg}
+            highlight = {colors.teal, colors.bg}
         }
     }
 
@@ -151,7 +160,7 @@ local gl = require("galaxyline")
         GitBranch = {
             provider = "GitBranch",
             condition = require("galaxyline.provider_vcs").check_git_workspace,
-            highlight = {colors.green, colors.line_bg}
+            highlight = {colors.teal, colors.bg}
         }
     }
 
@@ -162,7 +171,7 @@ local gl = require("galaxyline")
             end,
             separator = " ",
             separator_highlight = {colors.bg, colors.bg},
-            highlight = {colors.lightbg, colors.bg}
+            highlight = {colors.fg, colors.bg}
         }
     }
 
@@ -180,7 +189,7 @@ local gl = require("galaxyline")
                 }
                 return alias[vim.fn.mode()]
             end,
-            highlight = {colors.fg, colors.lightbg}
+            highlight = {colors.blue, colors.bg}
         }
     }
 
@@ -188,8 +197,8 @@ local gl = require("galaxyline")
         PerCent = {
             provider = "LinePercent",
             separator = " ",
-            separator_highlight = {colors.lightbg, colors.lightbg},
-            highlight = {colors.fg, colors.lightbg}
+            separator_highlight = {colors.fg, colors.bg},
+            highlight = {colors.fg, colors.bg}
         }
     }
 
@@ -198,6 +207,6 @@ local gl = require("galaxyline")
             provider = function()
                 return " "
             end,
-            highlight = {colors.lightbg, colors.bg}
+            highlight = {colors.fg, colors.bg}
         }
     }

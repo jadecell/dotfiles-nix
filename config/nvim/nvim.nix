@@ -5,14 +5,25 @@
 # please submit an issue on Github or contact me on Discord 'notusknot#5622'
 { pkgs, config, ... }:
 
+let
+    tokyonight-nvim = pkgs.vimUtils.buildVimPlugin {
+        name = "tokyonight-nvim";
+        src = pkgs.fetchFromGitHub {
+            owner = "folke";
+            repo = "tokyonight.nvim";
+            rev = "2981e4bd0919305675d8d665f9a20281bb33ed06";
+            sha256 = "ARvX6a/btRP9uTWGEW0yWL0lqE6G9OF89krjrMMre5Y=";
+        };
+    };
+in
 {
 environment.systemPackages = with pkgs; [
     (neovim.override {
         configure = {
             packages.myPlugins = with pkgs.vimPlugins; {
-                start = [ popup-nvim plenary-nvim nvim-compe neorg ];
-                opt = [
+                start = [
                 # File tree
+                popup-nvim plenary-nvim nvim-compe neorg 
                 nvim-web-devicons 
                 nvim-tree-lua
 
@@ -23,12 +34,13 @@ environment.systemPackages = with pkgs; [
                 vim-nix
 
                 # Eyecandy 
-                nvim-treesitter
-                bufferline-nvim
+                lualine-nvim
                 galaxyline-nvim
+                bufferline-nvim
                 nvim-colorizer-lua
-
+                tokyonight-nvim
                 pears-nvim
+                nvim-treesitter
 
                 # Telescope
                 telescope-nvim
@@ -55,6 +67,7 @@ environment.systemPackages = with pkgs; [
                     filetype plugin indent on
                     packadd nvim-treesitter
                     
+                    packadd tokyonight-nvim
                     packadd plenary-nvim
                     packadd nvim-web-devicons
                     packadd nvim-tree-lua
@@ -74,8 +87,8 @@ environment.systemPackages = with pkgs; [
                 ]]
 
                 vim.defer_fn(function()
-                    dofile("/home/jackson/.config/nixos/config/nvim/lua/settings.lua")
-                end, 15)
+                    dofile(os.getenv("NIXOS_CONFIG_DIR") .. "config/nvim/lua/settings.lua")
+                end, 0)
             end, 0)
             EOF
         '';
