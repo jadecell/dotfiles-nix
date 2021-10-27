@@ -108,6 +108,8 @@ in
 	pidof xcompmgr || xcompmgr &
        
 	pidof mpd || mpd &
+
+    [ ! -f \"$HOME/.config/wallpaper\" ] && setbg $HOME/.config/nixos/config/wall.png &
 	setbg &
 
         pidof udiskie || udiskie --tray &
