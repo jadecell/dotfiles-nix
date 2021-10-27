@@ -91,7 +91,7 @@
         inherit system;
         
         modules = [
-        ./configuration.nix ./config/packages.nix ./config/hosts/orion.nix
+        ./configuration.nix ./config/packages.nix ./config/hosts/nova.nix
             home-manager.nixosModules.home-manager {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;

@@ -8,6 +8,7 @@
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
+
   boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-amd" ];
@@ -30,6 +31,11 @@
     };
 
   swapDevices = [ ];
+
+  networking.hostName = "orion";
+  networking.networkmanager.enable = true;
+  #networking.useDHCP = false;
+  #networking.interfaces.enp4s0.useDHCP = true;
 
   powerManagement.cpuFreqGovernor = lib.mkDefault "performance";
 

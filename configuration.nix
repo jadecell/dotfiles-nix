@@ -31,8 +31,15 @@
   # Use the systemd-boot EFI boot loader.
   boot = {
     loader = {
-      systemd-boot.enable = true;
-      efi.canTouchEfiVariables = true;
+      grub = {
+          efiSupport = true;
+          device = "nodev";
+      };
+      #systemd-boot.enable = true;
+      efi = { 
+        canTouchEfiVariables = true; 
+        efiSysMountPoint = "/boot";
+      };
     };
     supportedFilesystems = [ "ntfs" "ext4" "vfat" ];
     kernelPackages = pkgs.linuxPackages_latest;
@@ -77,7 +84,7 @@
     isNormalUser = true;
     shell = pkgs.zsh;
     initialPassword = "123";
-    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "networkmanager" ]; # Enable ‘sudo’ for the user.
   };
 
   environment.shells = [ pkgs.bashInteractive pkgs.zsh ];
