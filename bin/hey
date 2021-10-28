@@ -36,13 +36,18 @@ if [ $# -eq 0 ]; then
   error "Please supply an argument"
 fi
 
-updateoption=false
-switchoption=false
-
+updateoption="off"
+switchoption="off"
+rollbackoption="off"
+searchoption="off"
 case "$1" in
-  "update") updateoption=true
+  "update") updateoption="on"
   ;;
-  "switch") switchoption=true
+  "switch") switchoption="on"
+  ;;
+  "rollback") rollbackoption="on"
+  ;;
+  "search") searchoption="on" && [ $# -eq 1 ] && error "Please provide a search term"
   ;;
   *) error "Invalid option"
   ;;
@@ -50,15 +55,47 @@ esac
 
 cd "$NIXOS_CONFIG_DIR"
 
-if [ $updateoption ]; then
+if [ "$updateoption" = "on" ]; then
   sudo nix flake update
   sudo nixos-rebuild switch --flake .#$hostname
   print "Successfully updated system!"
   exit 0
 fi
 
-if [ $switchoption ]; then
+if [ "$switchoption" = "on" ]; then
   sudo nixos-rebuild switch --flake .#$hostname
   print "Successfully switched system!"
   exit 0
+fi
+
+if [ "$searchoption" = "on" ]; then
+    nix search nixpkgs $2
+fi
+
+if [ "$rollbackoption" = "on" ]; then
+
+    nix-env --rollback --dry-run
+
+    printf "Would you like to continue [y/N]? "
+    read -r ROLLBACKCONTINUE
+
+    case $ROLLBACKCONTINUE in
+    Y | y)
+        SWITCHROLLBACKCONTINUE=true
+        ;;
+    N | n)
+        SWITCHROLLBACKCONTINUE=false
+        ;;
+    "")
+        SWITCHROLLBACKCONTINUE=false
+        ;;
+    *)
+        echo "Invalid option"
+        exit 1
+        ;;
+    esac
+
+    $SWITCHROLLBACKCONTINUE && nix-env --rollback 
+    print "Successfully rolled back!"
+
 fi

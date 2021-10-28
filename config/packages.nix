@@ -31,6 +31,7 @@
       gnome.geary
       nextcloud-client
       nitrogen
+      system-config-printer
 
       # Misc
       pop-gtk-theme

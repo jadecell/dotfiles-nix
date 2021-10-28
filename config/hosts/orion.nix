@@ -34,8 +34,6 @@
 
   networking.hostName = "orion";
   networking.networkmanager.enable = true;
-  #networking.useDHCP = false;
-  #networking.interfaces.enp4s0.useDHCP = true;
 
   powerManagement.cpuFreqGovernor = lib.mkDefault "performance";
 

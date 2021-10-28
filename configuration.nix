@@ -45,6 +45,12 @@
     kernelPackages = pkgs.linuxPackages_latest;
   };
 
+  # Printing
+  services.printing = {
+      enable = true;
+      drivers = [ pkgs.brgenml1lpr pkgs.brgenml1cupswrapper ];
+  };
+
 
   # Set your time zone.
   time.timeZone = "America/Vancouver";
