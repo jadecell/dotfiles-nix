@@ -3,6 +3,7 @@ pkgs:
     enable = true;
     extensions = with pkgs.nur.repos.rycee.firefox-addons; [
         decentraleyes
+        startpage-private-search
         bitwarden
         ublock-origin
         clearurls

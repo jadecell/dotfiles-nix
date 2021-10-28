@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 {
-  imports = [ ./config/nvim/nvim.nix ];
+  imports = [ ./config/nvim/nvim.nix ./config/zfs/snapshot.nix ];
 
   environment.variables = {
        NIXOS_CONFIG="$HOME/.config/nixos/configuration.nix";
@@ -44,6 +44,8 @@
     	enableUnstable = true;
     };
   };
+
+  services.zfs.autoScrub.enable = true;
   networking.hostId = "31c8719e";
 
   # Printing
