@@ -48,7 +48,6 @@
   swapDevices = [ ];
 
   networking.hostName = "orion";
-  networking.networkmanager.enable = true;
 
   powerManagement.cpuFreqGovernor = lib.mkDefault "performance";
 

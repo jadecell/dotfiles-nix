@@ -40,13 +40,13 @@
     supportedFilesystems = [ "ntfs" "zfs" "ext4" "vfat" ];
     kernelPackages = pkgs.linuxPackages_latest;
     kernelParams = [ "nohibernate" ];
+    cleanTmpDir = true;
     zfs = {
     	enableUnstable = true;
     };
   };
 
   services.zfs.autoScrub.enable = true;
-  networking.hostId = "31c8719e";
 
   # Printing
   services.printing = {
@@ -54,6 +54,13 @@
       drivers = [ pkgs.brgenml1lpr pkgs.brgenml1cupswrapper ];
   };
 
+  # Networking
+  networking = {
+    networkmanager.enable = true;
+
+    # zfs host ID
+    hostId = "31c8719e";
+  }; 
 
   # Set your time zone.
   time.timeZone = "America/Vancouver";
@@ -65,15 +72,19 @@
     keyMap = "us";
   };
 
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-
-  services.xserver.displayManager.startx.enable = true;
-  services.xserver.displayManager.defaultSession = "none+dwm";
-  services.xserver.windowManager.dwm.enable = true;
-  
-  # Configure keymap in X11
-  services.xserver.layout = "us";
+  # X11
+  services.xserver = {
+    enable = true;
+    displayManager = {
+        startx.enable = true;
+        defaultSession = "none+dwm";
+    };
+    windowManager.dwm.enable = true;
+    
+    # Configure keymap in X11
+    layout = "us";
+    libinput.enable = true;
+  };
 
   # Enable pipewire for sound.
   security.rtkit.enable = true;
@@ -81,9 +92,6 @@
     enable = true;
     pulse.enable = true;
   };
-
-  # Enable touchpad support (enabled default in most desktopManager).
-  services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.jackson = {
@@ -118,6 +126,14 @@
 
   # Mullvad
   services.mullvad-vpn.enable = true;
+
+  # Cron Jobs
+  services.cron = {
+      enable = true;
+      systemCronJobs = [
+        "*/15 * * * *   jackson   export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus; export DISPLAY=:0; /home/jackson/.config/nixos/bin/cron/newsup"
+      ];
+  };
 
   system.stateVersion = "21.05"; # DO NOT CHANGE
 

@@ -49,6 +49,7 @@ in
 
   fonts.fontconfig.enable = true;
 
+
   # Gtk settings
   gtk = {
     enable = true;

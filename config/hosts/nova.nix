@@ -25,7 +25,6 @@
 
   swapDevices = [ ];
   networking.hostName = "nova";
-  networking.networkmanager.enable = true;
 
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
 }
