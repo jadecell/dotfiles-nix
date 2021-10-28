@@ -1,10 +1,7 @@
 { config, pkgs, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./config/nvim/nvim.nix
-    ];
+  imports = [ ./config/nvim/nvim.nix ];
 
   environment.variables = {
        NIXOS_CONFIG="$HOME/.config/nixos/configuration.nix";
@@ -28,22 +25,26 @@
   
   nixpkgs.config.allowBroken = true;
 
-  # Use the systemd-boot EFI boot loader.
   boot = {
     loader = {
       grub = {
           efiSupport = true;
           device = "nodev";
+          copyKernels = true;
       };
-      #systemd-boot.enable = true;
       efi = { 
         canTouchEfiVariables = true; 
         efiSysMountPoint = "/boot";
       };
     };
-    supportedFilesystems = [ "ntfs" "ext4" "vfat" ];
+    supportedFilesystems = [ "ntfs" "zfs" "ext4" "vfat" ];
     kernelPackages = pkgs.linuxPackages_latest;
+    kernelParams = [ "nohibernate" ];
+    zfs = {
+    	enableUnstable = true;
+    };
   };
+  networking.hostId = "31c8719e";
 
   # Printing
   services.printing = {
@@ -71,9 +72,6 @@
   
   # Configure keymap in X11
   services.xserver.layout = "us";
-
-  # Enable CUPS to print documents.
-  # services.printing.enable = true;
 
   # Enable pipewire for sound.
   security.rtkit.enable = true;
@@ -119,13 +117,7 @@
   # Mullvad
   services.mullvad-vpn.enable = true;
 
-  # This value determines the NixOS release from which the default
-  # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
-  # this value at the release version of the first install of this system.
-  # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "21.05"; # Did you read the comment?
+  system.stateVersion = "21.05"; # DO NOT CHANGE
 
 }
 
