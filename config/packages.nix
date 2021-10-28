@@ -39,6 +39,7 @@
       dmenu
       udiskie
       udisks2
+      sanoid
 
       # Terminal applications
       killall
