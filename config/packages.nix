@@ -16,6 +16,7 @@
 
       # Graphical User Interfaces
       gparted
+      filezilla
       mullvad-vpn
       firefox
       pcmanfm
@@ -35,6 +36,7 @@
 
       # Misc
       pop-gtk-theme
+      harfbuzz
       dwmblocks
       dmenu
       udiskie

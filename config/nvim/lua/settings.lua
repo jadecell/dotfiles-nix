@@ -7,6 +7,7 @@ dofile(os.getenv("NIXOS_CONFIG_DIR") .. "config/nvim/lua/lsp.lua")
 dofile(os.getenv("NIXOS_CONFIG_DIR") .. "config/nvim/lua/nvim-tree.lua")
 dofile(os.getenv("NIXOS_CONFIG_DIR") .. "config/nvim/lua/plugins.lua")
 dofile(os.getenv("NIXOS_CONFIG_DIR") .. "config/nvim/lua/treesitter.lua")
+dofile(os.getenv("NIXOS_CONFIG_DIR") .. "config/nvim/lua/autocommands.lua")
 
 -- Set night
 g.tokyonight_style = "night"

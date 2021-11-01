@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 {
-  imports = [ ./config/nvim/nvim.nix ./config/zfs/snapshot.nix ];
+  imports = [ ./config/zfs/snapshot.nix ];
 
   environment.variables = {
        NIXOS_CONFIG="$HOME/.config/nixos/configuration.nix";

@@ -9,6 +9,7 @@ let
     alacrittysettings = import ./alacritty/alacritty.nix;
     ncmpcppsettings = import ./ncmpcpp/ncmpcpp.nix;
     newsboatsettings = import ./newsboat/newsboat.nix;
+    kittysettings = import ./kitty/kitty.nix;
 in
 {
   # Let Home Manager install and manage itself.
@@ -30,7 +31,7 @@ in
   # the Home Manager release notes for a list of state version
   # changes in each release.
   home.stateVersion = "21.05";
-
+  
   # Source extra files to clean this one up
   imports = [ 
     ./fixmonitors/fixmonitors.nix 
@@ -46,6 +47,7 @@ in
   programs.alacritty = alacrittysettings pkgs;
   programs.ncmpcpp = ncmpcppsettings pkgs;
   programs.newsboat = newsboatsettings pkgs;
+  programs.kitty = kittysettings pkgs;
 
   fonts.fontconfig.enable = true;
 

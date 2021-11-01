@@ -35,7 +35,7 @@
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/BEAB-4613";
+    { device = "/dev/disk/by-label/NIXBOOT";
       fsType = "vfat";
     };
 

@@ -51,46 +51,34 @@ environment.systemPackages = with pkgs; [
             ];
         };
         customRC = ''
-            lua << EOF
+              syntax on
+              filetype on
+              filetype plugin indent on
+              packadd nvim-treesitter
+              
+              packadd tokyonight-nvim
+              packadd plenary-nvim
+              packadd nvim-web-devicons
+              packadd nvim-tree-lua
+              packadd nvim-lspconfig
+              packadd nvim-compe
+              packadd vim-nix
+              packadd nvim-treesitter
+              packadd bufferline-nvim	
+              packadd galaxyline-nvim
+              packadd nvim-colorizer-lua
+              packadd telescope-nvim
+              packadd indent-blankline-nvim
+              packadd pears-nvim
+              packadd neorg
 
-            vim.cmd [[
-                syntax off
-                filetype off
-                filetype plugin indent off
-            ]]
+              doautocmd BufRead
 
-            vim.defer_fn(function()
-
-                vim.cmd [[
-                    syntax on
-                    filetype on
-                    filetype plugin indent on
-                    packadd nvim-treesitter
-                    
-                    packadd tokyonight-nvim
-                    packadd plenary-nvim
-                    packadd nvim-web-devicons
-                    packadd nvim-tree-lua
-                    packadd nvim-lspconfig
-                    packadd nvim-compe
-                    packadd vim-nix
-                    packadd nvim-treesitter
-                    packadd bufferline-nvim	
-                    packadd galaxyline-nvim
-                    packadd nvim-colorizer-lua
-                    packadd telescope-nvim
-                    packadd indent-blankline-nvim
-                    packadd pears-nvim
-                    packadd neorg
-
-                    doautocmd BufRead
-                ]]
-
-                vim.defer_fn(function()
-                    dofile(os.getenv("NIXOS_CONFIG_DIR") .. "config/nvim/lua/settings.lua")
-                end, 0)
-            end, 0)
-            EOF
+              lua << EOF
+		    vim.defer_fn(function() 
+			dofile(os.getenv("NIXOS_CONFIG_DIR") .. "config/nvim/lua/settings.lua")
+		    end, 1)
+              EOF
         '';
         };
     }

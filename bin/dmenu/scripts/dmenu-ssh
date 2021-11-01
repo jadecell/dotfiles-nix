@@ -4,14 +4,19 @@
 . ${NIXOS_CONFIG_DIR}bin/dmenu/settings
 
 declare options=("quit
+seedbox
 mccrory.xyz")
 
 choice=$(echo -e "${options[@]}" | dmenu $DMENU_ARGUMENTS -p 'SSH to: ')
 
 case "$choice" in
+    seedbox)
+        $TERMINAL -e ssh jadecell@server1355.seedhost.eu
+    ;;
     quit)
         echo "Program terminated." && exit 1
     ;;
+    *)
+       $TERMINAL -e ssh "$(whoami)@$choice"
+    ;;
 esac
-
-[ -n "$choice" ] && st -e ssh "$(whoami)@$choice"
