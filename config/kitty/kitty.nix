@@ -2,14 +2,14 @@ pkgs:
 {
   enable = true;
   font = {
-    name = "RobotoMono Nerd Font";
-    size = 12;
+    name = "RobotoMono Nerd Font Heavy";
+    size = 13;
   };
   settings = {
     disable_ligatures = false;
     scrollback_lines = 10000;
-    window_padding_width = 6;
-    background_opacity = 0.9;
+    window_padding_width = 1;
+    background_opacity = "0.9";
     term = "xterm";
 
     # Cursor 

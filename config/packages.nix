@@ -42,6 +42,8 @@
       udiskie
       udisks2
       sanoid
+      shfmt
+      shellcheck
 
       # Terminal applications
       killall
@@ -111,11 +113,14 @@
       python39Packages.eyeD3
       #python38Packages.eyeD3
       gcc
+      lua52Packages.luacheck
+      lua
       lazygit
 
-      # Language servers for neovim; change these to whatever languages you code in
-      # Please note: if you remove any of these, make sure to also remove them from nvim/config/nvim/lua/lsp.lua!!
+      # Lang servers
       rnix-lsp
+      clang-tools
+      nodePackages.bash-language-server
       sumneko-lua-language-server
     ];
 

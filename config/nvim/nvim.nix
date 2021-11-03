@@ -15,72 +15,31 @@ let
             sha256 = "ARvX6a/btRP9uTWGEW0yWL0lqE6G9OF89krjrMMre5Y=";
         };
     };
+
 in
 {
-environment.systemPackages = with pkgs; [
-    (neovim.override {
-        configure = {
-            packages.myPlugins = with pkgs.vimPlugins; {
-                start = [
-                # File tree
-                popup-nvim plenary-nvim nvim-compe neorg 
-                nvim-web-devicons 
-                nvim-tree-lua
+    enable = true;
+    plugins = with pkgs.vimPlugins; [
+	
+	gitsigns-nvim
+	colorizer
+	feline-nvim
+	vim-commentary
+	nvim-cmp
+	cmp-nvim-lsp
+	nvim-lspconfig
+	nvim-treesitter
+	cmp-treesitter
+	telescope-nvim
+	lsp_signature-nvim
+	nvim-autopairs
+	nvim-compe
+	vim-nix
 
-                # LSP
-                nvim-lspconfig
-
-                # Languages
-                vim-nix
-
-                # Eyecandy 
-                lualine-nvim
-                galaxyline-nvim
-                bufferline-nvim
-                nvim-colorizer-lua
-                tokyonight-nvim
-                pears-nvim
-                nvim-treesitter
-
-                # Telescope
-                telescope-nvim
-
-                # Indent lines
-                indent-blankline-nvim
-
-            ];
-        };
-        customRC = ''
-              syntax on
-              filetype on
-              filetype plugin indent on
-              packadd nvim-treesitter
-              
-              packadd tokyonight-nvim
-              packadd plenary-nvim
-              packadd nvim-web-devicons
-              packadd nvim-tree-lua
-              packadd nvim-lspconfig
-              packadd nvim-compe
-              packadd vim-nix
-              packadd nvim-treesitter
-              packadd bufferline-nvim	
-              packadd galaxyline-nvim
-              packadd nvim-colorizer-lua
-              packadd telescope-nvim
-              packadd indent-blankline-nvim
-              packadd pears-nvim
-              packadd neorg
-
-              doautocmd BufRead
-
-              lua << EOF
-		    vim.defer_fn(function() 
-			dofile(os.getenv("NIXOS_CONFIG_DIR") .. "config/nvim/lua/settings.lua")
-		    end, 1)
-              EOF
-        '';
-        };
-    }
-)];
+	# Colorscheme
+	tokyonight-nvim
+    ];
+    extraConfig = ''
+        luafile /home/jackson/.config/nixos/config/nvim/lua/settings.lua
+    '';
 }

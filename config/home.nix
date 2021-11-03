@@ -10,6 +10,7 @@ let
     ncmpcppsettings = import ./ncmpcpp/ncmpcpp.nix;
     newsboatsettings = import ./newsboat/newsboat.nix;
     kittysettings = import ./kitty/kitty.nix;
+    nvimsettings = import ./nvim/nvim.nix;
 in
 {
   # Let Home Manager install and manage itself.
@@ -48,6 +49,7 @@ in
   programs.ncmpcpp = ncmpcppsettings pkgs;
   programs.newsboat = newsboatsettings pkgs;
   programs.kitty = kittysettings pkgs;
+  programs.neovim = nvimsettings pkgs;
 
   fonts.fontconfig.enable = true;
 

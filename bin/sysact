@@ -7,8 +7,8 @@ case "$(printf "🚪leave dwm\n🔒lock\n ♻ renew dwm\n🐻hibernate\n💤slee
 '♻ renew dwm') kill -HUP "$(pgrep -u "$USER" "\bdwm$")" ;;
 '🐻hibernate') slock $ctl hibernate ;;
 '💤sleep') slock $ctl suspend ;;
-'🔃reboot') reboot ;;
-'🔃firmware reboot') reboot --firmware ;;
+'🔃reboot') $ctl reboot ;;
+'🔃firmware reboot') $ctl reboot --firmware ;;
 '🖥shutdown') shutdown ;;
 '📺display off') xset dpms force off ;;
 *) exit 1 ;;
