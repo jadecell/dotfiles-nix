@@ -23,7 +23,10 @@ in
 	
 	gitsigns-nvim
 	colorizer
-	feline-nvim
+        luasnip
+        cmp_luasnip
+	nvim-web-devicons
+        feline-nvim
 	vim-commentary
 	nvim-cmp
 	cmp-nvim-lsp
@@ -40,6 +43,6 @@ in
 	tokyonight-nvim
     ];
     extraConfig = ''
-        luafile /home/jackson/.config/nixos/config/nvim/lua/settings.lua
+        luafile /home/jackson/.config/nixos/config/nvim/lua/init.lua
     '';
 }

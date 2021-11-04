@@ -59,7 +59,7 @@
     networkmanager.enable = true;
 
     # zfs host ID
-    hostId = "31c8719e";
+    hostId = "a5280a4d";
   }; 
 
   # Set your time zone.

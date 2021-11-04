@@ -31,6 +31,7 @@
       gimp
       gnome.geary
       nextcloud-client
+      remmina
       nitrogen
       system-config-printer
 

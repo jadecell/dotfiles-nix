@@ -86,10 +86,10 @@ pkgs:
         ";
         bookmarks = {
             "Plex" = {
-                url = "https://server1355.seedhost.eu:30422/web";
+                url = "https://server433.seedhost.eu:32400/web";
             };
             "Deluge" = {
-                url = "https://server1355.seedhost.eu/jadecell/deluge/";
+                url = "https://server433.seedhost.eu/jadecell/deluge/";
             };
             "Torrent Galaxy" = { 
                 url = "https://torrentgalaxy.to";
