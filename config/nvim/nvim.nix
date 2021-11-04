@@ -23,6 +23,7 @@ in
 	
 	gitsigns-nvim
 	colorizer
+        trouble-nvim
         luasnip
         cmp_luasnip
 	nvim-web-devicons

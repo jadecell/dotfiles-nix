@@ -11,7 +11,7 @@ choice=$(echo -e "${options[@]}" | dmenu $DMENU_ARGUMENTS -p 'SSH to: ')
 
 case "$choice" in
     seedbox)
-        kitty -e kitty +kitten ssh jadecell@server1355.seedhost.eu
+        kitty -e kitty +kitten ssh jadecell@server433.seedhost.eu
     ;;
     quit)
         echo "Program terminated." && exit 1

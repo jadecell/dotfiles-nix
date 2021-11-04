@@ -32,6 +32,8 @@ capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 -- Enable the following language servers
 require'lspconfig'.rnix.setup{}
 require'lspconfig'.sumneko_lua.setup{}
+require'lspconfig'.bashls.setup{}
+require'lspconfig'.clangd.setup{}
 
 -- Autocompletion setup
 require'compe'.setup {

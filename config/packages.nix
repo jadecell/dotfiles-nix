@@ -17,6 +17,8 @@
       # Graphical User Interfaces
       gparted
       filezilla
+      #chromium
+      ungoogled-chromium
       mullvad-vpn
       firefox
       pcmanfm
