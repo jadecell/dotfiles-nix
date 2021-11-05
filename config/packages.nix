@@ -19,7 +19,6 @@
       filezilla
       #chromium
       ungoogled-chromium
-      mullvad-vpn
       firefox
       pcmanfm
       stalonetray

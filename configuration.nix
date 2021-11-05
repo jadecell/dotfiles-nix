@@ -124,9 +124,6 @@
     gnome-online-accounts.enable = true;
   };
 
-  # Mullvad
-  services.mullvad-vpn.enable = true;
-
   # Cron Jobs
   services.cron = {
       enable = true;
