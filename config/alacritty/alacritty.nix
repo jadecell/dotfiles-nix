@@ -2,6 +2,9 @@ pkgs:
 {
   enable = true;
   settings = {
+    env = {
+      TERM = "xterm-256color";
+    };
     window = {
       dynamic_title = true;
       dynamic_padding = false;

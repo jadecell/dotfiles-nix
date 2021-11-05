@@ -130,3 +130,8 @@ require('nvim-treesitter.configs').setup {
     },
   },
 }
+
+-- Setup surround.nvim
+require("surround").setup {
+    mappings_style = "surround"
+}

@@ -16,6 +16,16 @@ let
         };
     };
 
+    surround-nvim = pkgs.vimUtils.buildVimPlugin {
+        name = "surround-nvim";
+        src = pkgs.fetchFromGitHub {
+            owner = "blackCauldron7";
+            repo = "surround.nvim";
+            rev = "0aca06a4ac9068e932c7e5ddd5ec035ea592a265";
+            sha256 = "wsX5+p8x6tNO7viZJoh3a0AqBhRldSIganvhWGxP5iE=";
+        };
+    };
+
 in
 {
     enable = true;
@@ -25,6 +35,7 @@ in
 	colorizer
         trouble-nvim
         luasnip
+        surround-nvim
         cmp_luasnip
 	nvim-web-devicons
         feline-nvim

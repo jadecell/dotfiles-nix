@@ -10,7 +10,7 @@ pkgs:
     scrollback_lines = 10000;
     window_padding_width = 1;
     background_opacity = "0.9";
-    term = "xterm";
+    term = "st-256color";
 
     # Cursor 
     cursor_shape = "beam";
