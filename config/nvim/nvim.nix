@@ -6,15 +6,6 @@
 { pkgs, config, ... }:
 
 let
-    tokyonight-nvim = pkgs.vimUtils.buildVimPlugin {
-        name = "tokyonight-nvim";
-        src = pkgs.fetchFromGitHub {
-            owner = "folke";
-            repo = "tokyonight.nvim";
-            rev = "2981e4bd0919305675d8d665f9a20281bb33ed06";
-            sha256 = "ARvX6a/btRP9uTWGEW0yWL0lqE6G9OF89krjrMMre5Y=";
-        };
-    };
 
     surround-nvim = pkgs.vimUtils.buildVimPlugin {
         name = "surround-nvim";

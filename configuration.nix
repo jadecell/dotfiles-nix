@@ -135,6 +135,19 @@
       ];
   };
 
+  # Udev rules
+  services.udev.packages = [
+    pkgs.zsa-udev-rules
+    (pkgs.writeTextFile {
+      name = "libfido2_udev";
+      text = ''
+KERNEL=="hidraw*", SUBSYSTEM=="hidraw", \
+  MODE="0664", GROUP="plugdev", ATTRS{idVendor}=="1050"
+      '';
+      destination = "/etc/udev/rules.d/51-libfido2.rules";
+    })
+  ];
+
   system.stateVersion = "21.05"; # DO NOT CHANGE
 
 }

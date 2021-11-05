@@ -43,6 +43,8 @@
       dwmblocks
       dmenu
       udiskie
+      libfido2
+      wally-cli
       udisks2
       sanoid
       shfmt
