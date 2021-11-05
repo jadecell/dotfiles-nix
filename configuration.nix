@@ -148,6 +148,13 @@ KERNEL=="hidraw*", SUBSYSTEM=="hidraw", \
     })
   ];
 
+  security.sudo = {
+    enable = true;
+    extraConfig = "
+Defaults !tty_tickets
+    ";
+  };
+
   system.stateVersion = "21.05"; # DO NOT CHANGE
 
 }
