@@ -5,7 +5,6 @@
 
     # Install all the packages
     environment.systemPackages = with pkgs; [
-
       # Terminal emulators
       kitty
       alacritty	
@@ -56,6 +55,7 @@
       bc
       fzf
       ripgrep
+      scrot
       fd
       bat
       lm_sensors

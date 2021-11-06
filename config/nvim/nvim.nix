@@ -25,6 +25,7 @@ in
 	gitsigns-nvim
 	colorizer
         trouble-nvim
+        markdown-preview-nvim
         luasnip
         surround-nvim
         cmp_luasnip
