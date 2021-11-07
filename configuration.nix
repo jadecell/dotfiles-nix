@@ -1,8 +1,6 @@
 { config, pkgs, ... }:
 
 {
-  imports = [ ./config/zfs/snapshot.nix ];
-
   environment.variables = {
        NIXOS_CONFIG="$HOME/.config/nixos/configuration.nix";
        NIXOS_CONFIG_DIR="$HOME/.config/nixos/";
@@ -37,16 +35,12 @@
         efiSysMountPoint = "/boot";
       };
     };
-    supportedFilesystems = [ "ntfs" "zfs" "ext4" "vfat" ];
+    supportedFilesystems = [ "ntfs" "ext4" "vfat" ];
     kernelPackages = pkgs.linuxPackages_latest;
     kernelParams = [ "nohibernate" ];
     cleanTmpDir = true;
-    zfs = {
-    	enableUnstable = true;
-    };
   };
 
-  services.zfs.autoScrub.enable = true;
 
   # Printing
   services.printing = {
@@ -58,8 +52,6 @@
   networking = {
     networkmanager.enable = true;
 
-    # zfs host ID
-    hostId = "a5280a4d";
   }; 
 
   # Set your time zone.

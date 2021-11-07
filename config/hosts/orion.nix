@@ -14,24 +14,10 @@
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
+
   fileSystems."/" =
-    { device = "rpool/root/nixos";
-      fsType = "zfs";
-    };
-
-  fileSystems."/home" =
-    { device = "rpool/home";
-      fsType = "zfs";
-    };
-
-  fileSystems."/nix" =
-    { device = "rpool/local/nix";
-      fsType = "zfs";
-    };
-
-  fileSystems."/var" =
-    { device = "rpool/local/var";
-      fsType = "zfs";
+    { device = "/dev/disk/by-label/NIXROOT";
+      fsType = "ext4";
     };
 
   fileSystems."/boot" =
@@ -39,11 +25,11 @@
       fsType = "vfat";
     };
 
-  fileSystems."/home/jackson/Media" = {
-    device = "/dev/disk/by-uuid/48fcb030-45da-4b60-9036-bb335ba9aa92";
-    fsType = "ext4";
-    options = [ "user" "rw" ];
-  };
+  # fileSystems."/home/jackson/Media" = {
+  #  device = "/dev/disk/by-uuid/48fcb030-45da-4b60-9036-bb335ba9aa92";
+  #  fsType = "ext4";
+  #  options = [ "user" "rw" ];
+  #};
 
   swapDevices = [ ];
 
