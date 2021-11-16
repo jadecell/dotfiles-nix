@@ -32,7 +32,7 @@ color article white default bold
 
 browser linkhandler
 macro , open-in-browser
-macro w set browser \"firefox\" ; open-in-browser ; set browser linkhandler
+macro w set browser \"brave\" ; open-in-browser ; set browser linkhandler
 macro v set browser \"mpv\" ; open-in-browser ; set browser linkhandler
 macro c set browser \"echo %u | xclip -r -sel c\" ; open-in-browser ; set browser linkhandler
 

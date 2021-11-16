@@ -19,6 +19,7 @@
       #chromium
       ungoogled-chromium
       firefox
+      brave
       pcmanfm
       stalonetray
       gnome.seahorse
@@ -72,6 +73,7 @@
       mpv
       pamixer
       polkit_gnome
+      spotdl
       zip
       unzip
       jq
